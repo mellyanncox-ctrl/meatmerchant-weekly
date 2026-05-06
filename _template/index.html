@@ -331,75 +331,187 @@
 
       <!-- ============================================================
            04 · WEBSITE UPDATES
+           ============================================================
+           Each website change is its own card with a live HTML preview.
+
+           To add a new change:
+           1. Save the HTML for the proposed change as web-1.html,
+              web-2.html, etc. in the same folder as this file.
+           2. Copy the .web-change block below and update src=, the
+              title, the where (page location), and the metadata fields.
+
+           To show an image instead of HTML preview:
+              Replace .web-preview-wrap with .web-image-preview
+              and use <img src="web-1-mockup.jpg"> instead of <iframe>.
+
+           To show a no-preview placeholder (e.g. just copy changes):
+              Replace .web-preview-wrap with .web-no-preview
+              and write a short description.
            ============================================================ -->
       <div class="section">
         <div class="section-num">04</div>
         <div class="section-title">Website Updates</div>
-        <div class="section-tag">What needs to change on the site this week.</div>
+        <div class="section-tag">Each proposed change with a live preview. Approve or request changes per item.</div>
 
-        <ul class="checklist">
-          <!-- EDIT: each row = one website task -->
-          <li>
-            <div class="check-box"><input type="checkbox"></div>
-            <div class="check-content">
-              <div class="check-title">Homepage banner update</div>
-              <div class="check-note">EDIT: e.g. Swap to Mother's Day hero. Headline + CTA + cut-off line. 2400×1200px, hero collection slot 1.</div>
+        <!-- WEB CHANGE 01 — HTML PREVIEW EXAMPLE -->
+        <div class="web-change">
+          <div class="web-change-header">
+            <div>
+              <div class="wc-num">Change 01</div>
+              <div class="wc-title">EDIT: e.g. Homepage hero banner</div>
             </div>
-            <div class="check-status">To do</div>
-          </li>
-          <li>
-            <div class="check-box"><input type="checkbox"></div>
-            <div class="check-content">
-              <div class="check-title">Featured product / weekly special</div>
-              <div class="check-note">EDIT: e.g. Set the week's lead product as featured on homepage and "Build Your Box".</div>
-            </div>
-            <div class="check-status">To do</div>
-          </li>
-          <li>
-            <div class="check-box"><input type="checkbox"></div>
-            <div class="check-content">
-              <div class="check-title">Product page updates</div>
-              <div class="check-note">EDIT: e.g. Add cut-off badges. Update "feeds X people" line in title.</div>
-            </div>
-            <div class="check-status">To do</div>
-          </li>
-          <li>
-            <div class="check-box"><input type="checkbox"></div>
-            <div class="check-content">
-              <div class="check-title">Collection page updates</div>
-              <div class="check-note">EDIT: e.g. Build campaign collection. Pin to nav. Reorder hero by margin priority.</div>
-            </div>
-            <div class="check-status">To do</div>
-          </li>
-          <li>
-            <div class="check-box"><input type="checkbox"></div>
-            <div class="check-content">
-              <div class="check-title">Pop-up / announcement bar copy</div>
-              <div class="check-note">EDIT: e.g. Top bar: cut-off line. Pop-up off this week.</div>
-            </div>
-            <div class="check-status">To do</div>
-          </li>
-          <li>
-            <div class="check-box"><input type="checkbox"></div>
-            <div class="check-content">
-              <div class="check-title">Copy changes required</div>
-              <div class="check-note">EDIT: e.g. Footer delivery line. Cart messaging — add cut-off reminder.</div>
-            </div>
-            <div class="check-status">To do</div>
-          </li>
-        </ul>
+            <!-- EDIT: where this change lives on the site -->
+            <div class="wc-where">Homepage · Top hero</div>
+          </div>
 
-        <div class="feedback-row" style="margin-top: 20px; border-radius: 4px; border: 1px solid var(--border);">
-          <div class="fb-label">Website updates · Approval</div>
-          <div class="fb-actions">
-            <a class="fb-btn approve"
-               href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Website%20Updates%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AThe%20website%20updates%20list%20is%20approved.%20Proceed.%0A%0A%E2%80%94"
-            >Approve website list</a>
-            <a class="fb-btn changes"
-               href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Website%20Updates%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20website%20updates%3A%0A%0A-%20%5Bwhich%20task%5D%3A%0A-%20%5Bwhat%20to%20change%5D%3A%0A%0A%E2%80%94"
-            >Request changes</a>
+          <!-- EDIT: drop web-1.html into this folder. iframe loads it. -->
+          <div class="web-preview-wrap">
+            <div class="preview-bar">
+              <div class="pb-info">
+                <div class="pb-name">web-1.html</div>
+                <div class="pb-meta">Live preview · banner code as it'll render on site</div>
+              </div>
+              <div class="pb-actions">
+                <a class="pb-btn" href="web-1.html" target="_blank" rel="noopener">Open in tab</a>
+              </div>
+            </div>
+            <iframe
+              class="web-iframe"
+              src="web-1.html"
+              sandbox="allow-same-origin allow-popups"
+              title="Homepage banner preview"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div class="web-meta">
+            <div class="label">What's changing</div>
+            <!-- EDIT --><div class="value">e.g. Replace current homepage hero with the Mother's Day version. New headline, cut-off line, CTA to Build Your Box.</div>
+
+            <div class="label">Where it lives</div>
+            <!-- EDIT --><div class="value">Homepage · Hero collection slot 1 · 2400×1200px</div>
+
+            <div class="label">Goes live</div>
+            <!-- EDIT --><div class="value">Tuesday morning, before Email 1 send at 12pm</div>
+
+            <div class="label">Comes down</div>
+            <!-- EDIT --><div class="value">Saturday evening (swap to next week's hero)</div>
+
+            <div class="label">Notes</div>
+            <!-- EDIT --><div class="value">Mobile-tested. Loma Coffee logo position unchanged.</div>
+          </div>
+
+          <div class="feedback-row">
+            <div class="fb-label">Change 01 · Approval</div>
+            <div class="fb-actions">
+              <a class="fb-btn approve"
+                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Web%20Change%2001%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AWeb%20change%2001%20%28%5Bdescribe%5D%29%20is%20approved.%20Push%20it%20live.%0A%0A%E2%80%94"
+              >Approve</a>
+              <a class="fb-btn changes"
+                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Web%20Change%2001%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20web%20change%2001%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
+              >Request changes</a>
+            </div>
           </div>
         </div>
+
+        <!-- WEB CHANGE 02 — HTML PREVIEW (e.g. pop-up or top bar) -->
+        <div class="web-change">
+          <div class="web-change-header">
+            <div>
+              <div class="wc-num">Change 02</div>
+              <div class="wc-title">EDIT: e.g. Top announcement bar</div>
+            </div>
+            <div class="wc-where">Site-wide · Top bar</div>
+          </div>
+
+          <div class="web-preview-wrap">
+            <div class="preview-bar">
+              <div class="pb-info">
+                <div class="pb-name">web-2.html</div>
+                <div class="pb-meta">Live preview</div>
+              </div>
+              <div class="pb-actions">
+                <a class="pb-btn" href="web-2.html" target="_blank" rel="noopener">Open in tab</a>
+              </div>
+            </div>
+            <iframe
+              class="web-iframe short"
+              src="web-2.html"
+              sandbox="allow-same-origin allow-popups"
+              title="Top bar preview"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div class="web-meta">
+            <div class="label">What's changing</div>
+            <!-- EDIT --><div class="value">e.g. Top bar updated with cut-off countdown.</div>
+
+            <div class="label">Where it lives</div>
+            <!-- EDIT --><div class="value">Site-wide top bar · Above main nav</div>
+
+            <div class="label">Goes live</div>
+            <!-- EDIT --><div class="value">Tuesday morning</div>
+
+            <div class="label">Comes down</div>
+            <!-- EDIT --><div class="value">Saturday morning</div>
+          </div>
+
+          <div class="feedback-row">
+            <div class="fb-label">Change 02 · Approval</div>
+            <div class="fb-actions">
+              <a class="fb-btn approve"
+                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Web%20Change%2002%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AWeb%20change%2002%20is%20approved.%0A%0A%E2%80%94"
+              >Approve</a>
+              <a class="fb-btn changes"
+                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Web%20Change%2002%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20web%20change%2002%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
+              >Request changes</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- WEB CHANGE 03 — NO-PREVIEW EXAMPLE (e.g. text-only changes) -->
+        <div class="web-change">
+          <div class="web-change-header">
+            <div>
+              <div class="wc-num">Change 03</div>
+              <div class="wc-title">EDIT: e.g. Cart messaging update</div>
+            </div>
+            <div class="wc-where">Cart page · Header</div>
+          </div>
+
+          <div class="web-no-preview">
+            <strong>Copy change · No visual preview</strong>
+            EDIT: Describe the change in plain text — e.g. New cart header copy: "Order before Friday for Mother's Day delivery."
+          </div>
+
+          <div class="web-meta">
+            <div class="label">What's changing</div>
+            <!-- EDIT --><div class="value">e.g. Cart page header text updated to include cut-off reminder.</div>
+
+            <div class="label">Where it lives</div>
+            <!-- EDIT --><div class="value">/cart page · Above line items</div>
+
+            <div class="label">Goes live</div>
+            <!-- EDIT --><div class="value">Tuesday morning</div>
+
+            <div class="label">Notes</div>
+            <!-- EDIT --><div class="value">Reverts to default copy Saturday morning.</div>
+          </div>
+
+          <div class="feedback-row">
+            <div class="fb-label">Change 03 · Approval</div>
+            <div class="fb-actions">
+              <a class="fb-btn approve"
+                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Web%20Change%2003%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AWeb%20change%2003%20is%20approved.%0A%0A%E2%80%94"
+              >Approve</a>
+              <a class="fb-btn changes"
+                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Web%20Change%2003%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20web%20change%2003%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
+              >Request changes</a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- ============================================================

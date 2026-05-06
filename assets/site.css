@@ -660,6 +660,150 @@ h3.sub {
 .checklist li.done .check-title { text-decoration: line-through; opacity: 0.5; }
 
 /* ============================================================
+   WEBSITE CHANGE CARDS — same DNA as email cards
+   ============================================================ */
+.web-change {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  border-radius: 4px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+.web-change:first-of-type { margin-top: 8px; }
+.web-change-header {
+  background: var(--dark);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.web-change-header .wc-num {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.web-change-header .wc-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.web-change-header .wc-where {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: rgba(175,54,48,0.18);
+  border: 1px solid rgba(175,54,48,0.4);
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+
+/* Iframe preview wrap — narrower margins than email since these are smaller */
+.web-preview-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  margin: 20px 24px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.web-iframe {
+  width: 100%;
+  height: 380px;
+  border: none;
+  background: var(--white);
+  display: block;
+}
+.web-iframe.tall { height: 600px; }
+.web-iframe.short { height: 220px; }
+
+/* No-preview state — when the change is just text/copy with no HTML file */
+.web-no-preview {
+  margin: 20px 24px;
+  padding: 32px 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+  color: var(--light);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.web-no-preview strong {
+  display: block;
+  color: var(--dark);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* Image preview — for screenshots/mockups instead of HTML */
+.web-image-preview {
+  margin: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.web-image-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.web-meta {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+}
+.web-meta .label {
+  background: var(--white);
+  padding: 14px 22px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--light);
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+.web-meta .value {
+  padding: 14px 22px;
+  font-size: 14px;
+  color: var(--dark);
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  line-height: 1.55;
+}
+.web-meta .label:nth-last-child(2),
+.web-meta .value:nth-last-child(1) { border-bottom: none; }
+.web-meta .value strong { font-weight: 700; }
+
+@media (max-width: 900px) {
+  .web-meta { grid-template-columns: 1fr; }
+  .web-meta .label {
+    border-right: none;
+    padding: 10px 18px;
+    background: var(--bg);
+  }
+  .web-meta .value { padding: 12px 18px; }
+  .web-iframe { height: 280px; }
+}
+
+/* ============================================================
    CREATIVE GRID
    ============================================================ */
 .creative-grid {
