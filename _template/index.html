@@ -25,18 +25,16 @@
         - creative-2b.jpg
         The <img> tags already point to those filenames.
 
-     5. Update the sidebar week list and the homepage:
+     5. Drop any web change HTML files into the folder as
+        web-1.html, web-2.html, etc.
+
+     6. Update the sidebar week list and the homepage:
         - Edit ../../index.html — add a new <li> at the top
         - Edit weeks/PREVIOUS-WEEK/index.html sidebar — add the
-          new week to its sidebar too (or use a simple find/replace
-          across all weeks/* folders)
-
-     6. Search this file for "FEEDBACK_EMAIL" and confirm your
-        email address is correct in the mailto: links.
+          new week to its sidebar too
 
      7. Commit + push:
         git add . && git commit -m "Week of YYYY-MM-DD" && git push
-
      ============================================================ -->
 <title>Week of [DATE] | Meat Merchant Casuarina</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -59,9 +57,9 @@
     <ul class="week-list">
       <!-- EDIT: Add new weeks at the top, mark the current week with class="current" -->
       <li>
-        <a href="../2026-05-04/" class="current">
-          <span class="week-tag">Current · Week 1</span>
-          Mon 4 May 2026
+        <a href="../YYYY-MM-DD/" class="current">
+          <span class="week-tag">Current · Week N</span>
+          Mon DD Month YYYY
         </a>
       </li>
     </ul>
@@ -81,14 +79,13 @@
       <!-- HEADER -->
       <div class="report-header">
         <div class="header-label">Weekly Marketing Plan</div>
-        <!-- EDIT: Title is brand-fixed, no change needed -->
         <div class="header-title">Meat Merchant<br><span class="accent">Casuarina.</span></div>
         <div class="header-sub">Email · Website · Creative — for review and approval.</div>
 
         <div class="header-meta">
           <div class="meta-item">
             <div class="lbl">WEEK COMMENCING</div>
-            <!-- EDIT: Week commencing -->
+            <!-- EDIT -->
             <div class="val">Monday DD Month YYYY</div>
           </div>
           <div class="meta-item">
@@ -106,7 +103,7 @@
       <div class="approval-bar">
         <div class="bar-msg">For review by Matt &amp; Harry · Approval requested before send</div>
         <div class="bar-actions">
-          <!-- EDIT: confirm your email in the mailto links throughout this file -->
+          <!-- EDIT: update "Week of DD Month" in subject lines -->
           <a class="bar-btn"
              href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Meat%20Merchant%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AThe%20full%20week%20is%20approved.%20Send%20it.%0A%0A%E2%80%94"
           >Approve full week</a>
@@ -114,11 +111,6 @@
              href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Meat%20Merchant%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
           >Request changes</a>
         </div>
-      </div>
-
-      <!-- INTRO -->
-      <div class="intro">
-        <p>This week's plan covers <strong>two campaign emails, the website updates that need to land alongside them, and four creative options for paid social</strong>. Each section has its own approval buttons so you can sign off on individual items or request changes.</p>
       </div>
 
       <!-- ============================================================
@@ -132,33 +124,24 @@
         <div class="overview-grid">
           <div class="overview-row">
             <div class="lbl">Week Commencing</div>
-            <!-- EDIT -->
-            <div class="val">Monday DD Month YYYY</div>
+            <!-- EDIT --><div class="val">Monday DD Month YYYY</div>
           </div>
           <div class="overview-row">
             <div class="lbl">Main Campaign Focus</div>
-            <!-- EDIT -->
-            <div class="val">e.g. Mother's Day weekend — drive pre-orders before Friday cut-off.</div>
+            <!-- EDIT --><div class="val">e.g. Mother's Day weekend — drive pre-orders before Friday cut-off.</div>
           </div>
           <div class="overview-row">
             <div class="lbl">Key Offer / Special</div>
-            <!-- EDIT -->
-            <div class="val">e.g. Bone-in leg of lamb · $89 · Free-range, feeds 6–8.</div>
+            <!-- EDIT --><div class="val">e.g. Bone-in leg of lamb · $89 · feeds 6–8.</div>
           </div>
           <div class="overview-row">
             <div class="lbl">Main Customer Message</div>
-            <!-- EDIT -->
-            <div class="val">e.g. Don't leave Sunday too late. QLD Thursday cut-off, NSW Friday.</div>
+            <!-- EDIT --><div class="val">e.g. Don't leave Sunday too late. QLD Thursday cut-off, NSW Friday.</div>
           </div>
           <div class="overview-row">
             <div class="lbl">Primary CTA</div>
-            <!-- EDIT -->
-            <div class="val">e.g. Order for Mother's Day → meatmerchantonline.com.au/pages/build-your-box</div>
+            <!-- EDIT --><div class="val">e.g. Order for Mother's Day → meatmerchantonline.com.au/pages/build-your-box</div>
           </div>
-        </div>
-
-        <div class="callout">
-          <p><strong>Plan note</strong>Everything that follows in Sections 02–05 supports this single weekly focus.</p>
         </div>
       </div>
 
@@ -168,20 +151,19 @@
       <div class="section">
         <div class="section-num">02</div>
         <div class="section-title">Email 1</div>
-        <div class="section-tag">First send of the week. The lead announcement.</div>
 
         <div class="email-card">
           <div class="email-header">
             <div>
               <div class="e-num">Send 01 of 02</div>
-              <div class="e-title">Email 1 — Lead Send</div>
+              <!-- EDIT: short campaign title -->
+              <div class="e-title">EDIT: Email 1 title</div>
             </div>
-            <!-- EDIT: send date -->
-            <div class="e-date">Tuesday DD Month · 9:00am</div>
+            <!-- EDIT: send day + time -->
+            <div class="e-date">Day DD Month · 12pm</div>
           </div>
 
           <!-- LIVE EMAIL PREVIEW -->
-          <!-- EDIT: drop email-1.html into this folder. iframe loads it from there. -->
           <div class="email-preview-wrap">
             <div class="preview-bar">
               <div class="pb-info">
@@ -201,37 +183,6 @@
             ></iframe>
           </div>
 
-          <div class="email-meta">
-            <div class="label">Campaign Objective</div>
-            <!-- EDIT -->
-            <div class="value">e.g. Announce the Mother's Day range. Drive pre-orders before Friday QLD cut-off.</div>
-
-            <div class="label">Segment</div>
-            <!-- EDIT -->
-            <div class="value"><strong>All subscribers</strong> · QLD + NSW · Engaged 90 days</div>
-
-            <div class="label">Subject Line</div>
-            <!-- EDIT -->
-            <div class="value"><strong>Don't leave Sunday too late.</strong></div>
-
-            <div class="label">Preview Text</div>
-            <!-- EDIT -->
-            <div class="value">QLD Thursday cut-off. NSW Friday. That's your window for Mother's Day.</div>
-
-            <div class="label">CTA Button Text</div>
-            <!-- EDIT -->
-            <div class="value"><span class="cta-pill">Order for Mother's Day →</span></div>
-
-            <div class="label">Product / Website Links</div>
-            <div class="value">
-              <ul class="link-list">
-                <!-- EDIT: list every link used in the email -->
-                <li><strong>Primary CTA:</strong> https://www.meatmerchantonline.com.au/pages/build-your-box</li>
-                <li><strong>UTM tags:</strong> <code>?utm_source=klaviyo&amp;utm_medium=email&amp;utm_campaign=mothers-day-01</code></li>
-              </ul>
-            </div>
-          </div>
-
           <!-- PER-ITEM APPROVAL -->
           <div class="feedback-row">
             <div class="fb-label">Email 1 · Approval</div>
@@ -240,7 +191,7 @@
                  href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Email%201%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AEmail%201%20is%20approved.%20Send%20it.%0A%0A%E2%80%94"
               >Approve email 1</a>
               <a class="fb-btn changes"
-                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Email%201%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20Email%201%3A%0A%0A-%20%5Bsubject%20line%5D%3A%0A-%20%5Bcopy%5D%3A%0A-%20%5Boffer%5D%3A%0A%0A%E2%80%94"
+                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Email%201%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20Email%201%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
               >Request changes</a>
             </div>
           </div>
@@ -253,16 +204,16 @@
       <div class="section">
         <div class="section-num">03</div>
         <div class="section-title">Email 2</div>
-        <div class="section-tag">Second send of the week. The reminder, urgency, or follow-up angle.</div>
 
         <div class="email-card">
           <div class="email-header">
             <div>
               <div class="e-num">Send 02 of 02</div>
-              <div class="e-title">Email 2 — Reminder Send</div>
+              <!-- EDIT -->
+              <div class="e-title">EDIT: Email 2 title</div>
             </div>
             <!-- EDIT -->
-            <div class="e-date">Friday DD Month · 11:00am</div>
+            <div class="e-date">Day DD Month · 11:00am</div>
           </div>
 
           <div class="email-preview-wrap">
@@ -284,37 +235,6 @@
             ></iframe>
           </div>
 
-          <div class="email-meta">
-            <div class="label">Campaign Objective</div>
-            <!-- EDIT -->
-            <div class="value">e.g. Final reminder — capture the late deciders before NSW cut-off closes at 5pm.</div>
-
-            <div class="label">Segment</div>
-            <!-- EDIT -->
-            <div class="value"><strong>Email 1 non-purchasers</strong> · NSW only</div>
-
-            <div class="label">Subject Line</div>
-            <!-- EDIT -->
-            <div class="value"><strong>Last chance for Sunday.</strong></div>
-
-            <div class="label">Preview Text</div>
-            <!-- EDIT -->
-            <div class="value">NSW orders close at 5pm. After that, no Mother's Day delivery.</div>
-
-            <div class="label">CTA Button Text</div>
-            <!-- EDIT -->
-            <div class="value"><span class="cta-pill">Order before 5pm →</span></div>
-
-            <div class="label">Product / Website Links</div>
-            <div class="value">
-              <ul class="link-list">
-                <!-- EDIT -->
-                <li><strong>Primary CTA:</strong> https://www.meatmerchantonline.com.au/pages/build-your-box</li>
-                <li><strong>UTM tags:</strong> <code>?utm_source=klaviyo&amp;utm_medium=email&amp;utm_campaign=mothers-day-02</code></li>
-              </ul>
-            </div>
-          </div>
-
           <div class="feedback-row">
             <div class="fb-label">Email 2 · Approval</div>
             <div class="fb-actions">
@@ -322,7 +242,7 @@
                  href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Email%202%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AEmail%202%20is%20approved.%20Send%20it.%0A%0A%E2%80%94"
               >Approve email 2</a>
               <a class="fb-btn changes"
-                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Email%202%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20Email%202%3A%0A%0A-%20%5Bsubject%20line%5D%3A%0A-%20%5Bcopy%5D%3A%0A-%20%5Boffer%5D%3A%0A%0A%E2%80%94"
+                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Email%202%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20Email%202%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
               >Request changes</a>
             </div>
           </div>
@@ -337,12 +257,8 @@
            To add a new change:
            1. Save the HTML for the proposed change as web-1.html,
               web-2.html, etc. in the same folder as this file.
-           2. Copy the .web-change block below and update src=, the
-              title, the where (page location), and the metadata fields.
-
-           To show an image instead of HTML preview:
-              Replace .web-preview-wrap with .web-image-preview
-              and use <img src="web-1-mockup.jpg"> instead of <iframe>.
+           2. Copy a .web-change block below and update src=, the
+              title, and the where (page location).
 
            To show a no-preview placeholder (e.g. just copy changes):
               Replace .web-preview-wrap with .web-no-preview
@@ -351,20 +267,19 @@
       <div class="section">
         <div class="section-num">04</div>
         <div class="section-title">Website Updates</div>
-        <div class="section-tag">Each proposed change with a live preview. Approve or request changes per item.</div>
 
         <!-- WEB CHANGE 01 — HTML PREVIEW EXAMPLE -->
         <div class="web-change">
           <div class="web-change-header">
             <div>
               <div class="wc-num">Change 01</div>
+              <!-- EDIT -->
               <div class="wc-title">EDIT: e.g. Homepage hero banner</div>
             </div>
             <!-- EDIT: where this change lives on the site -->
-            <div class="wc-where">Homepage · Top hero</div>
+            <div class="wc-where">EDIT: e.g. Homepage · Slot 1</div>
           </div>
 
-          <!-- EDIT: drop web-1.html into this folder. iframe loads it. -->
           <div class="web-preview-wrap">
             <div class="preview-bar">
               <div class="pb-info">
@@ -379,33 +294,16 @@
               class="web-iframe"
               src="web-1.html"
               sandbox="allow-same-origin allow-popups"
-              title="Homepage banner preview"
+              title="Change 01 preview"
               loading="lazy"
             ></iframe>
-          </div>
-
-          <div class="web-meta">
-            <div class="label">What's changing</div>
-            <!-- EDIT --><div class="value">e.g. Replace current homepage hero with the Mother's Day version. New headline, cut-off line, CTA to Build Your Box.</div>
-
-            <div class="label">Where it lives</div>
-            <!-- EDIT --><div class="value">Homepage · Hero collection slot 1 · 2400×1200px</div>
-
-            <div class="label">Goes live</div>
-            <!-- EDIT --><div class="value">Tuesday morning, before Email 1 send at 12pm</div>
-
-            <div class="label">Comes down</div>
-            <!-- EDIT --><div class="value">Saturday evening (swap to next week's hero)</div>
-
-            <div class="label">Notes</div>
-            <!-- EDIT --><div class="value">Mobile-tested. Loma Coffee logo position unchanged.</div>
           </div>
 
           <div class="feedback-row">
             <div class="fb-label">Change 01 · Approval</div>
             <div class="fb-actions">
               <a class="fb-btn approve"
-                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Web%20Change%2001%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AWeb%20change%2001%20%28%5Bdescribe%5D%29%20is%20approved.%20Push%20it%20live.%0A%0A%E2%80%94"
+                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Web%20Change%2001%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AWeb%20change%2001%20is%20approved.%20Push%20it%20live.%0A%0A%E2%80%94"
               >Approve</a>
               <a class="fb-btn changes"
                  href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Web%20Change%2001%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20web%20change%2001%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
@@ -414,47 +312,21 @@
           </div>
         </div>
 
-        <!-- WEB CHANGE 02 — HTML PREVIEW (e.g. pop-up or top bar) -->
+        <!-- WEB CHANGE 02 — NO-PREVIEW EXAMPLE (e.g. text-only changes) -->
         <div class="web-change">
           <div class="web-change-header">
             <div>
               <div class="wc-num">Change 02</div>
-              <div class="wc-title">EDIT: e.g. Top announcement bar</div>
+              <!-- EDIT -->
+              <div class="wc-title">EDIT: e.g. Cart messaging update</div>
             </div>
-            <div class="wc-where">Site-wide · Top bar</div>
+            <!-- EDIT -->
+            <div class="wc-where">EDIT: e.g. Cart page · Header</div>
           </div>
 
-          <div class="web-preview-wrap">
-            <div class="preview-bar">
-              <div class="pb-info">
-                <div class="pb-name">web-2.html</div>
-                <div class="pb-meta">Live preview</div>
-              </div>
-              <div class="pb-actions">
-                <a class="pb-btn" href="web-2.html" target="_blank" rel="noopener">Open in tab</a>
-              </div>
-            </div>
-            <iframe
-              class="web-iframe short"
-              src="web-2.html"
-              sandbox="allow-same-origin allow-popups"
-              title="Top bar preview"
-              loading="lazy"
-            ></iframe>
-          </div>
-
-          <div class="web-meta">
-            <div class="label">What's changing</div>
-            <!-- EDIT --><div class="value">e.g. Top bar updated with cut-off countdown.</div>
-
-            <div class="label">Where it lives</div>
-            <!-- EDIT --><div class="value">Site-wide top bar · Above main nav</div>
-
-            <div class="label">Goes live</div>
-            <!-- EDIT --><div class="value">Tuesday morning</div>
-
-            <div class="label">Comes down</div>
-            <!-- EDIT --><div class="value">Saturday morning</div>
+          <div class="web-no-preview">
+            <strong>Copy change · No visual preview</strong>
+            EDIT: Describe the change in plain text — e.g. New cart header copy: "Order before Friday for Mother's Day delivery."
           </div>
 
           <div class="feedback-row">
@@ -470,48 +342,6 @@
           </div>
         </div>
 
-        <!-- WEB CHANGE 03 — NO-PREVIEW EXAMPLE (e.g. text-only changes) -->
-        <div class="web-change">
-          <div class="web-change-header">
-            <div>
-              <div class="wc-num">Change 03</div>
-              <div class="wc-title">EDIT: e.g. Cart messaging update</div>
-            </div>
-            <div class="wc-where">Cart page · Header</div>
-          </div>
-
-          <div class="web-no-preview">
-            <strong>Copy change · No visual preview</strong>
-            EDIT: Describe the change in plain text — e.g. New cart header copy: "Order before Friday for Mother's Day delivery."
-          </div>
-
-          <div class="web-meta">
-            <div class="label">What's changing</div>
-            <!-- EDIT --><div class="value">e.g. Cart page header text updated to include cut-off reminder.</div>
-
-            <div class="label">Where it lives</div>
-            <!-- EDIT --><div class="value">/cart page · Above line items</div>
-
-            <div class="label">Goes live</div>
-            <!-- EDIT --><div class="value">Tuesday morning</div>
-
-            <div class="label">Notes</div>
-            <!-- EDIT --><div class="value">Reverts to default copy Saturday morning.</div>
-          </div>
-
-          <div class="feedback-row">
-            <div class="fb-label">Change 03 · Approval</div>
-            <div class="fb-actions">
-              <a class="fb-btn approve"
-                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Web%20Change%2003%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0AWeb%20change%2003%20is%20approved.%0A%0A%E2%80%94"
-              >Approve</a>
-              <a class="fb-btn changes"
-                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Web%20Change%2003%20%C2%B7%20Week%20of%20DD%20Month&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20web%20change%2003%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
-              >Request changes</a>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <!-- ============================================================
@@ -520,7 +350,6 @@
       <div class="section">
         <div class="section-num">05</div>
         <div class="section-title">Image Ad Creative</div>
-        <div class="section-tag">Four options across two formats. Two square (feed), two vertical (Stories &amp; Reels).</div>
 
         <h3 class="sub">1×1 Square · Feed Placements</h3>
         <div class="creative-grid">
@@ -532,31 +361,11 @@
               <div class="c-ratio">1:1 · 1080×1080</div>
             </div>
             <div class="image-slot square">
-              <!-- EDIT: drop creative-1a.jpg into this folder, then this img will load. -->
-              <!-- onerror keeps the placeholder visible if the file isn't there yet -->
               <img src="creative-1a.jpg" alt="Creative 1A" onerror="this.style.display='none'">
               <div class="ph-content">
                 <div class="ph-icon">+</div>
                 <div class="ph-text">creative-1a.jpg</div>
                 <div class="ph-sub">Add to this folder</div>
-              </div>
-            </div>
-            <div class="creative-fields">
-              <div class="field">
-                <div class="field-label">Creative Direction</div>
-                <!-- EDIT --><div class="field-value">e.g. Hero shot of lamb, dark moody styling.</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Headline / Overlay Text</div>
-                <!-- EDIT --><div class="field-value">e.g. "Don't leave Sunday too late."</div>
-              </div>
-              <div class="field">
-                <div class="field-label">CTA</div>
-                <!-- EDIT --><div class="field-value"><span class="cta-pill">Order Now</span></div>
-              </div>
-              <div class="field">
-                <div class="field-label">Usage</div>
-                <!-- EDIT --><div class="field-value">Meta Feed · Cold + warm · Run Tue–Fri</div>
               </div>
             </div>
             <div class="feedback-row">
@@ -580,24 +389,6 @@
                 <div class="ph-icon">+</div>
                 <div class="ph-text">creative-1b.jpg</div>
                 <div class="ph-sub">Add to this folder</div>
-              </div>
-            </div>
-            <div class="creative-fields">
-              <div class="field">
-                <div class="field-label">Creative Direction</div>
-                <!-- EDIT --><div class="field-value">e.g. Flat-lay of the full pack — overhead, butcher paper background.</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Headline / Overlay Text</div>
-                <!-- EDIT --><div class="field-value">e.g. "The whole Sunday, sorted."</div>
-              </div>
-              <div class="field">
-                <div class="field-label">CTA</div>
-                <!-- EDIT --><div class="field-value"><span class="cta-pill">Build Your Box</span></div>
-              </div>
-              <div class="field">
-                <div class="field-label">Usage</div>
-                <!-- EDIT --><div class="field-value">Meta Feed · Warm retargeting · Run Wed–Sat</div>
               </div>
             </div>
             <div class="feedback-row">
@@ -628,24 +419,6 @@
                 <div class="ph-sub">Add to this folder</div>
               </div>
             </div>
-            <div class="creative-fields">
-              <div class="field">
-                <div class="field-label">Creative Direction</div>
-                <!-- EDIT --><div class="field-value">e.g. Vertical hero — top-third headline, bottom-fifth swipe-up clear.</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Headline / Overlay Text</div>
-                <!-- EDIT --><div class="field-value">e.g. "Sunday on a plate."</div>
-              </div>
-              <div class="field">
-                <div class="field-label">CTA</div>
-                <!-- EDIT --><div class="field-value"><span class="cta-pill">Shop the Range</span></div>
-              </div>
-              <div class="field">
-                <div class="field-label">Usage</div>
-                <!-- EDIT --><div class="field-value">IG Stories + Reels · Cold + warm</div>
-              </div>
-            </div>
             <div class="feedback-row">
               <div class="fb-label">Creative 2A</div>
               <div class="fb-actions">
@@ -669,24 +442,6 @@
                 <div class="ph-sub">Add to this folder</div>
               </div>
             </div>
-            <div class="creative-fields">
-              <div class="field">
-                <div class="field-label">Creative Direction</div>
-                <!-- EDIT --><div class="field-value">e.g. Tight macro on the cut. Editorial, not promotional.</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Headline / Overlay Text</div>
-                <!-- EDIT --><div class="field-value">e.g. "Cut for Sunday."</div>
-              </div>
-              <div class="field">
-                <div class="field-label">CTA</div>
-                <!-- EDIT --><div class="field-value"><span class="cta-pill">Order Now</span></div>
-              </div>
-              <div class="field">
-                <div class="field-label">Usage</div>
-                <!-- EDIT --><div class="field-value">IG Reels · Cold prospecting</div>
-              </div>
-            </div>
             <div class="feedback-row">
               <div class="fb-label">Creative 2B</div>
               <div class="fb-actions">
@@ -702,7 +457,7 @@
       <!-- FOOTER -->
       <div class="footer">
         <strong>The Service Edit</strong> · Weekly marketing plan for Meat Merchant Casuarina
-        <div class="footer-line">conferencevenues.com.au · meatmerchantonline.com.au</div>
+        <div class="footer-line">meatmerchantonline.com.au</div>
       </div>
 
     </div>
