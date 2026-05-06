@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meat Merchant Casuarina · Weekly Marketing Plans</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* Lightweight homepage-only styling. Uses brand vars only. */
+  .home-hero {
+    padding: 32px 0 24px;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 36px;
+  }
+  .home-hero .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #af3630;
+    margin-bottom: 14px;
+  }
+  .home-hero h1 {
+    font-size: 2.6rem;
+    line-height: 1.05;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0 0 14px;
+  }
+  .home-hero h1 .accent { color: #af3630; }
+  .home-hero p.lede {
+    font-size: 1.05rem;
+    color: #444;
+    max-width: 640px;
+    margin: 0 0 22px;
+  }
+  .home-hero .hero-cta {
+    display: inline-block;
+    padding: 14px 22px;
+    background: #af3630;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border-radius: 4px;
+  }
+  .home-hero .hero-cta:hover { background: #1a1a1a; }
+  .home-hero .hero-meta {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .archive-head {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0 0 6px;
+  }
+  .archive-tag {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0 0 22px;
+  }
+  .archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+  .archive-card {
+    display: block;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .archive-card:hover {
+    border-color: #af3630;
+    transform: translateY(-2px);
+  }
+  .archive-card.current {
+    border-color: #af3630;
+    background: #fff;
+  }
+  .archive-card .card-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #af3630;
+    margin-bottom: 10px;
+  }
+  .archive-card .card-date {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 6px;
+  }
+  .archive-card .card-focus {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="site">
+
+  <!-- ============================================================
+       SIDEBAR · keep in sync with each week's sidebar
+       ============================================================ -->
+  <aside class="sidebar">
+    <a href="./" style="text-decoration: none; color: inherit; display: block;">
+      <div class="brand">The Service Edit ·</div>
+      <div class="brand-name">Meat Merchant<br><span class="accent">Casuarina.</span></div>
+      <div class="brand-sub">Weekly marketing plans</div>
+    </a>
+
+    <div class="nav-label">Plans · Most recent first</div>
+    <ul class="week-list">
+      <li>
+        <a href="weeks/2026-05-04/" class="current">
+          <span class="week-tag">Current · Week 1</span>
+          Mon 4 May 2026
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <strong>The Service Edit</strong><br>
+      Email · Web · Creative
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN
+       ============================================================ -->
+  <main class="main">
+    <div class="wrap">
+
+      <!-- HERO -->
+      <div class="home-hero">
+        <div class="eyebrow">The Service Edit · Weekly Marketing Plans</div>
+        <h1>Meat Merchant<br><span class="accent">Casuarina.</span></h1>
+        <p class="lede">Each week's email, website, and creative work in one place. For review and approval by Matt &amp; Harry.</p>
+        <a href="weeks/2026-05-04/" class="hero-cta">View this week's plan →</a>
+        <div class="hero-meta">Current week · Mon 4 May 2026 · Week 1</div>
+      </div>
+
+      <!-- ARCHIVE -->
+      <h2 class="archive-head">All weeks</h2>
+      <p class="archive-tag">Most recent first.</p>
+
+      <div class="archive-grid">
+        <a href="weeks/2026-05-04/" class="archive-card current">
+          <span class="card-tag">Current · Week 1</span>
+          <div class="card-date">Mon 4 May 2026</div>
+          <p class="card-focus">Mother's Day weekend &amp; Rib Fillet Special</p>
+        </a>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <strong>The Service Edit</strong> · Weekly marketing plan for Meat Merchant Casuarina
+        <div class="footer-line">conferencevenues.com.au · meatmerchantonline.com.au</div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+</body>
+</html>
