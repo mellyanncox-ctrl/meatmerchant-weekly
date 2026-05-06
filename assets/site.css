@@ -1021,3 +1021,19 @@ h3.sub {
 .image-slot:has(img:not([style*="display:none"])) .ph-content {
   display: none;
 }
+
+/* ============================================================
+   HOMEPAGE · seamless white background
+   Override the default grey for the main content area when
+   viewing the homepage. The body[data-page="home"] hook lets
+   us scope this without affecting individual week pages.
+   ============================================================ */
+body[data-page="home"] {
+  background: #fff;
+}
+body[data-page="home"] .main {
+  background: #fff;
+}
+body[data-page="home"] .wrap {
+  background: #fff;
+}
