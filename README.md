@@ -127,9 +127,9 @@ Every section has its own **Approve** and **Request changes** buttons. They use 
 
 - **Subject** pre-filled (e.g. `APPROVED · Email 1 · Week of DD Month`)
 - **Body** pre-filled with a template they fill in
-- **To** set to `mel@theserviceedit.com`
+- **To** set to `hello@theserviceedit.com`
 
-Before going live, **search the template and every week's index.html for `mel@theserviceedit.com`** and confirm that's the address you want feedback sent to. (If you change it later, search/replace across the whole repo.)
+Before going live, **search the template and every week's index.html for `hello@theserviceedit.com`** and confirm that's the address you want feedback sent to. (If you change it later, search/replace across the whole repo.)
 
 The "Approve full week" button at the top of each plan covers everything in one click. The per-section buttons are there for the times when one email is fine but the other needs work.
 
@@ -147,7 +147,7 @@ If you ever want a real form (with database storage, dashboards, etc.), Formspre
 ## Customisation notes
 
 ### Email address
-The `mailto:` links in `_template/index.html` and every `weeks/YYYY-MM-DD/index.html` point to `mel@theserviceedit.com`. Change in one place, then search/replace everywhere if needed.
+The `mailto:` links in `_template/index.html` and every `weeks/YYYY-MM-DD/index.html` point to `hello@theserviceedit.com`. Change in one place, then search/replace everywhere if needed.
 
 ### Brand colours
 All in `assets/site.css` `:root` — `--red`, `--dark`, `--cream`, etc. Change once, propagates everywhere.
