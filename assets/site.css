@@ -1008,3 +1008,16 @@ h3.sub {
   .email-iframe { height: 480px; }
   .approval-bar { flex-direction: column; align-items: flex-start; }
 }
+
+/* ============================================================
+   IMAGE PLACEHOLDER FIX
+   Hide the .ph-content overlay when the image is loaded and visible.
+   The img has onerror="this.style.display='none'" — so when the file
+   is missing, the img has display:none and the placeholder shows.
+   When the file is present, the img is visible and we hide the
+   placeholder. This relies on :has() (modern browsers, well supported).
+   ============================================================ */
+.image-slot:has(img:not([style*="display: none"])) .ph-content,
+.image-slot:has(img:not([style*="display:none"])) .ph-content {
+  display: none;
+}

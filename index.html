@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-  /* Homepage-only styling. Brand palette only. */
   .home-hero {
     padding: 32px 0 28px;
     border-bottom: 1px solid #ececec;
@@ -53,7 +52,6 @@
     font-size: 0.85rem;
     color: #666;
   }
-
   .archive-head {
     font-size: 1.4rem;
     font-weight: 900;
@@ -65,16 +63,12 @@
     color: #666;
     margin: 0 0 22px;
   }
-
-  /* FIX: explicit fixed-width tracks so a single card stays small,
-     doesn't stretch to fill the row. */
   .archive-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 280px);
     gap: 18px;
     margin-bottom: 40px;
   }
-
   .archive-card {
     display: block;
     padding: 22px;
@@ -112,21 +106,26 @@
     color: #555;
     margin: 0;
   }
-
-  /* Mobile fallback — single column full width */
+  .tbc {
+    display: inline-block;
+    padding: 2px 10px;
+    background: #fff4f3;
+    color: #af3630;
+    border: 1px dashed #af3630;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
   @media (max-width: 600px) {
-    .archive-grid {
-      grid-template-columns: 1fr;
-    }
+    .archive-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="site">
 
-  <!-- ============================================================
-       SIDEBAR
-       ============================================================ -->
   <aside class="sidebar">
     <a href="./" style="text-decoration: none; color: inherit; display: block;">
       <div class="brand">The Service Edit ·</div>
@@ -136,6 +135,84 @@
 
     <div class="nav-label">Plans · Most recent first</div>
     <ul class="week-list">
+      <li>
+        <a href="weeks/2026-08-03/">
+          <span class="week-tag">Week 14</span>
+          Mon 3 Aug 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-07-27/">
+          <span class="week-tag">Week 13</span>
+          Mon 27 Jul 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-07-20/">
+          <span class="week-tag">Week 12</span>
+          Mon 20 Jul 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-07-13/">
+          <span class="week-tag">Week 11</span>
+          Mon 13 Jul 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-07-06/">
+          <span class="week-tag">Week 10</span>
+          Mon 6 Jul 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-06-29/">
+          <span class="week-tag">Week 9</span>
+          Mon 29 Jun 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-06-22/">
+          <span class="week-tag">Week 8</span>
+          Mon 22 Jun 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-06-15/">
+          <span class="week-tag">Week 7</span>
+          Mon 15 Jun 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-06-08/">
+          <span class="week-tag">Week 6</span>
+          Mon 8 Jun 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-06-01/">
+          <span class="week-tag">Week 5</span>
+          Mon 1 Jun 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-05-25/">
+          <span class="week-tag">Week 4</span>
+          Mon 25 May 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-05-18/">
+          <span class="week-tag">Week 3</span>
+          Mon 18 May 2026
+        </a>
+      </li>
+      <li>
+        <a href="weeks/2026-05-11/">
+          <span class="week-tag">Week 2</span>
+          Mon 11 May 2026
+        </a>
+      </li>
       <li>
         <a href="weeks/2026-05-04/" class="current">
           <span class="week-tag">Current · Week 1</span>
@@ -150,13 +227,9 @@
     </div>
   </aside>
 
-  <!-- ============================================================
-       MAIN
-       ============================================================ -->
   <main class="main">
     <div class="wrap">
 
-      <!-- HERO -->
       <div class="home-hero">
         <div class="eyebrow">The Service Edit · Weekly Marketing Plans</div>
         <h1>Meat Merchant<br><span class="accent">Casuarina.</span></h1>
@@ -165,11 +238,75 @@
         <div class="hero-meta">Current week · Mon 4 May 2026 · Week 1</div>
       </div>
 
-      <!-- ARCHIVE -->
       <h2 class="archive-head">All weeks</h2>
       <p class="archive-tag">Most recent first.</p>
 
       <div class="archive-grid">
+        <a href="weeks/2026-08-03/" class="archive-card">
+          <span class="card-tag">Week 14</span>
+          <div class="card-date">Mon 3 Aug 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-07-27/" class="archive-card">
+          <span class="card-tag">Week 13</span>
+          <div class="card-date">Mon 27 Jul 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-07-20/" class="archive-card">
+          <span class="card-tag">Week 12</span>
+          <div class="card-date">Mon 20 Jul 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-07-13/" class="archive-card">
+          <span class="card-tag">Week 11</span>
+          <div class="card-date">Mon 13 Jul 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-07-06/" class="archive-card">
+          <span class="card-tag">Week 10</span>
+          <div class="card-date">Mon 6 Jul 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-06-29/" class="archive-card">
+          <span class="card-tag">Week 9</span>
+          <div class="card-date">Mon 29 Jun 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-06-22/" class="archive-card">
+          <span class="card-tag">Week 8</span>
+          <div class="card-date">Mon 22 Jun 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-06-15/" class="archive-card">
+          <span class="card-tag">Week 7</span>
+          <div class="card-date">Mon 15 Jun 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-06-08/" class="archive-card">
+          <span class="card-tag">Week 6</span>
+          <div class="card-date">Mon 8 Jun 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-06-01/" class="archive-card">
+          <span class="card-tag">Week 5</span>
+          <div class="card-date">Mon 1 Jun 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-05-25/" class="archive-card">
+          <span class="card-tag">Week 4</span>
+          <div class="card-date">Mon 25 May 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-05-18/" class="archive-card">
+          <span class="card-tag">Week 3</span>
+          <div class="card-date">Mon 18 May 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
+        <a href="weeks/2026-05-11/" class="archive-card">
+          <span class="card-tag">Week 2</span>
+          <div class="card-date">Mon 11 May 2026</div>
+          <p class="card-focus"><span class="tbc">To confirm</span></p>
+        </a>
         <a href="weeks/2026-05-04/" class="archive-card current">
           <span class="card-tag">Current · Week 1</span>
           <div class="card-date">Mon 4 May 2026</div>
@@ -177,7 +314,6 @@
         </a>
       </div>
 
-      <!-- FOOTER -->
       <div class="footer">
         <strong>The Service Edit</strong> · Weekly marketing plan for Meat Merchant Casuarina
       </div>
