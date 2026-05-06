@@ -7,9 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-  /* Lightweight homepage-only styling. Uses brand vars only. */
+  /* Homepage-only styling. Brand palette only. */
   .home-hero {
-    padding: 32px 0 24px;
+    padding: 32px 0 28px;
     border-bottom: 1px solid #ececec;
     margin-bottom: 36px;
   }
@@ -65,12 +65,16 @@
     color: #666;
     margin: 0 0 22px;
   }
+
+  /* FIX: explicit fixed-width tracks so a single card stays small,
+     doesn't stretch to fill the row. */
   .archive-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, 280px);
     gap: 18px;
     margin-bottom: 40px;
   }
+
   .archive-card {
     display: block;
     padding: 22px;
@@ -87,7 +91,6 @@
   }
   .archive-card.current {
     border-color: #af3630;
-    background: #fff;
   }
   .archive-card .card-tag {
     display: inline-block;
@@ -109,13 +112,20 @@
     color: #555;
     margin: 0;
   }
+
+  /* Mobile fallback — single column full width */
+  @media (max-width: 600px) {
+    .archive-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="site">
 
   <!-- ============================================================
-       SIDEBAR · keep in sync with each week's sidebar
+       SIDEBAR
        ============================================================ -->
   <aside class="sidebar">
     <a href="./" style="text-decoration: none; color: inherit; display: block;">
@@ -170,7 +180,6 @@
       <!-- FOOTER -->
       <div class="footer">
         <strong>The Service Edit</strong> · Weekly marketing plan for Meat Merchant Casuarina
-        <div class="footer-line">conferencevenues.com.au · meatmerchantonline.com.au</div>
       </div>
 
     </div>
