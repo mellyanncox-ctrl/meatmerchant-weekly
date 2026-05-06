@@ -1037,3 +1037,54 @@ body[data-page="home"] .main {
 body[data-page="home"] .wrap {
   background: #fff;
 }
+
+/* ============================================================
+   HOMEPAGE · light sidebar variant (Option B)
+   Scoped to body[data-page="home"] so week pages keep their
+   dark sidebar. Sidebar becomes white with dark text and a
+   single brand-red accent on the current week.
+   ============================================================ */
+body[data-page="home"] .sidebar {
+  background: #fff;
+  border-right: 1px solid #ececec;
+}
+body[data-page="home"] .sidebar .brand {
+  color: #af3630;
+}
+body[data-page="home"] .sidebar .brand-name {
+  color: #1a1a1a;
+}
+body[data-page="home"] .sidebar .brand-name .accent {
+  color: #af3630;
+}
+body[data-page="home"] .sidebar .brand-sub {
+  color: #888;
+}
+body[data-page="home"] .sidebar .nav-label {
+  color: #888;
+  border-bottom-color: #ececec;
+}
+body[data-page="home"] .sidebar .week-list a {
+  color: #1a1a1a;
+}
+body[data-page="home"] .sidebar .week-list a:hover {
+  background: #fafafa;
+}
+body[data-page="home"] .sidebar .week-list .week-tag {
+  color: #888;
+}
+body[data-page="home"] .sidebar-footer {
+  color: #888;
+  border-top-color: #ececec;
+}
+body[data-page="home"] .sidebar-footer strong {
+  color: #1a1a1a;
+}
+
+/* Mobile — keep the responsive border accent */
+@media (max-width: 900px) {
+  body[data-page="home"] .sidebar {
+    border-bottom: 4px solid #af3630;
+    border-right: none;
+  }
+}
