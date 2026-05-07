@@ -1456,3 +1456,34 @@ body[data-page="home"] .sidebar-footer strong {
     text-align: center;
   }
 }
+
+
+/* ============================================================
+   LOGO IMAGE · replaces text-based brand titles
+   ============================================================ */
+.logo-img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+.logo-sidebar {
+  width: 140px;
+  margin-bottom: 16px;
+}
+.logo-topbar {
+  height: 38px;
+  width: auto;
+}
+.logo-hero {
+  width: 200px;
+  margin-bottom: 18px;
+}
+.logo-this-week {
+  width: 110px;
+  margin-bottom: 18px;
+  opacity: 0.92;
+}
+@media (max-width: 600px) {
+  .logo-sidebar { width: 120px; }
+  .logo-hero { width: 160px; }
+}
