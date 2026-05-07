@@ -1088,3 +1088,134 @@ body[data-page="home"] .sidebar-footer strong {
     border-right: none;
   }
 }
+
+/* ============================================================
+   MOBILE HAMBURGER MENU
+   Hides the sidebar by default on mobile, shows a sticky top
+   bar with a hamburger icon. Tap the icon to slide the sidebar
+   in from the left. Tap the backdrop or a link to close.
+
+   No JavaScript dependency on a framework — uses a hidden
+   checkbox as the toggle state, controlled by tapping <label>s.
+   ============================================================ */
+
+/* Desktop: hamburger and topbar are hidden */
+.mobile-topbar { display: none; }
+.mobile-toggle { display: none; }
+.mobile-backdrop { display: none; }
+
+@media (max-width: 900px) {
+  /* The hidden checkbox that drives the open/closed state */
+  .mobile-toggle {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+
+  /* Sticky top bar with brand + hamburger button */
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 14px 18px;
+    border-bottom: 3px solid #af3630;
+  }
+  .mobile-topbar .mt-brand {
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+  }
+  .mobile-topbar .mt-brand .accent {
+    color: #af3630;
+  }
+  .mobile-topbar label.mt-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+  }
+  .mobile-topbar label.mt-burger span {
+    display: block;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  /* Backdrop (the dim layer behind the open menu) */
+  .mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  /* Reset earlier mobile sidebar rules — sidebar becomes a slide-in panel */
+  .site { display: block; }
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 300;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-out;
+    overflow-y: auto;
+    border-right: none !important;
+    border-bottom: none !important;
+    padding: 28px 24px !important;
+  }
+  .sidebar-footer {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 24px;
+  }
+
+  /* When checkbox is checked: slide in + show backdrop */
+  .mobile-toggle:checked ~ .mobile-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .mobile-toggle:checked ~ .site .sidebar,
+  .mobile-toggle:checked ~ .sidebar {
+    transform: translateX(0);
+  }
+
+  /* Animated burger -> X when open */
+  .mobile-toggle:checked ~ .mobile-topbar label.mt-burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .mobile-toggle:checked ~ .mobile-topbar label.mt-burger span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-toggle:checked ~ .mobile-topbar label.mt-burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Light sidebar variant for homepage on mobile too */
+  body[data-page="home"] .sidebar {
+    background: #fff;
+    color: #1a1a1a;
+    border-bottom: none !important;
+  }
+
+  /* Slight content padding adjustments for mobile */
+  .main { padding-top: 0; }
+  .home-hero { padding-top: 28px; }
+}
