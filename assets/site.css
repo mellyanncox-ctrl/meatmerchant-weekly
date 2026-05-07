@@ -1219,3 +1219,240 @@ body[data-page="home"] .sidebar-footer strong {
   .main { padding-top: 0; }
   .home-hero { padding-top: 28px; }
 }
+
+/* ============================================================
+   FEEDBACK SYSTEM · in-page approvals via Web3Forms
+   Replaces the old mailto Approve/Request Changes buttons.
+   No app switching — submissions go via fetch() to Web3Forms.
+   ============================================================ */
+
+/* ---- "From" picker at top of page ---------------------- */
+.from-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff4f3;
+  border: 1px solid #af3630;
+  border-radius: 6px;
+  padding: 12px 18px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.from-bar .fb-label {
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #af3630;
+}
+.from-bar select {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border: 1px solid #af3630;
+  background: #fff;
+  color: #1a1a1a;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.from-bar .fb-hint {
+  font-size: 0.82rem;
+  color: #888;
+  margin-left: auto;
+}
+@media (max-width: 600px) {
+  .from-bar .fb-hint { display: none; }
+}
+
+/* ---- The compact feedback row that replaces the old buttons ---- */
+.feedback-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  background: #fafafa;
+  border-top: 1px solid #ececec;
+}
+.feedback-row .fb-row-label {
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888;
+}
+.feedback-row .fb-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* The two compact buttons */
+.fb-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.fb-btn.approve {
+  background: #2e7d4f;
+  color: #fff;
+  border-color: #2e7d4f;
+}
+.fb-btn.approve:hover {
+  background: #245d3c;
+  border-color: #245d3c;
+}
+.fb-btn.note {
+  background: #fff;
+  color: #af3630;
+  border-color: #af3630;
+}
+.fb-btn.note:hover {
+  background: #af3630;
+  color: #fff;
+}
+
+/* The expanded note state */
+.fb-note-form {
+  display: none;
+  width: 100%;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #ececec;
+}
+.fb-note-form.open {
+  display: block;
+}
+.fb-note-form textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 12px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  background: #fff;
+  color: #1a1a1a;
+  box-sizing: border-box;
+}
+.fb-note-form textarea:focus {
+  outline: none;
+  border-color: #af3630;
+}
+.fb-note-form .fb-form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+.fb-note-form .fb-cancel {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 12px;
+}
+.fb-note-form .fb-send {
+  background: #af3630;
+  color: #fff;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 8px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.fb-note-form .fb-send:hover {
+  background: #1a1a1a;
+}
+.fb-note-form .fb-send:disabled {
+  background: #c8c8c8;
+  cursor: not-allowed;
+}
+
+/* Confirmation states (success / error) */
+.fb-confirm {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.fb-confirm.show { display: inline-flex; }
+.fb-confirm.success {
+  background: #e6f4ec;
+  color: #2e7d4f;
+  border: 1px solid #2e7d4f;
+}
+.fb-confirm.error {
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #c0392b;
+}
+.fb-confirm .fb-retry {
+  background: none;
+  border: none;
+  color: #c0392b;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  padding: 0 0 0 6px;
+}
+
+/* When approved/sent, hide the action buttons */
+.feedback-row.done .fb-actions { display: none; }
+.feedback-row.done .fb-note-form { display: none; }
+
+/* ---- Top approval bar — convert to in-page form ---- */
+.approval-bar .bar-btn {
+  cursor: pointer;
+  border: none;
+  font-family: 'Lato', sans-serif;
+}
+.approval-bar.done .bar-actions { display: none; }
+.approval-bar .bar-confirm {
+  display: none;
+  padding: 8px 16px;
+  background: #2e7d4f;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+}
+.approval-bar.done .bar-confirm { display: inline-block; }
+
+/* Mobile tweaks for feedback rows */
+@media (max-width: 600px) {
+  .feedback-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .feedback-row .fb-actions {
+    width: 100%;
+  }
+  .feedback-row .fb-btn {
+    flex: 1;
+    text-align: center;
+  }
+}

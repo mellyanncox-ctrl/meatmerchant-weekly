@@ -8,6 +8,7 @@
      Folder: weeks/2026-06-08/
      ============================================================ -->
 <title>Week of 8 June 2026 | Meat Merchant Casuarina</title>
+<meta name="week-tag" content="Week of 8 June 2026">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/site.css">
 <style>
@@ -176,14 +177,22 @@
       <div class="approval-bar">
         <div class="bar-msg">For review by Matt &amp; Harry · Approval requested before send</div>
         <div class="bar-actions">
-          <a class="bar-btn"
-             href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Meat%20Merchant%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0AThe%20full%20week%20is%20approved.%20Send%20it.%0A%0A%E2%80%94"
-          >Approve full week</a>
-          <a class="bar-btn secondary"
-             href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Meat%20Merchant%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
-          >Request changes</a>
+          <span class="bar-confirm"></span>
+          <button type="button" class="bar-btn">Approve full week</button>
+          <button type="button" class="bar-btn secondary">Request changes</button>
         </div>
       </div>
+      <!-- WHO'S GIVING FEEDBACK · pick once at top of page -->
+      <div class="from-bar">
+        <span class="fb-label">Feedback from:</span>
+        <select id="from-picker">
+          <option value="Matt">Matt</option>
+          <option value="Harry">Harry</option>
+          <option value="Both">Both</option>
+        </select>
+        <span class="fb-hint">Submissions go straight to Mel — no email app required.</span>
+      </div>
+
 
       <!-- ============================================================
            01 · WEEKLY OVERVIEW
@@ -266,17 +275,22 @@
             <div class="value"><span class="tbc">To confirm</span></div>
           </div>
 
-          <div class="feedback-row">
-            <div class="fb-label">Email 1 · Approval</div>
-            <div class="fb-actions">
-              <a class="fb-btn approve"
-                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Email%201%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0AEmail%201%20is%20approved.%20Send%20it.%0A%0A%E2%80%94"
-              >Approve email 1</a>
-              <a class="fb-btn changes"
-                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Email%201%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20Email%201%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
-              >Request changes</a>
-            </div>
-          </div>
+          <div class="feedback-row" data-section="Email 1">
+  <div class="fb-row-label">Email 1 · Approval</div>
+  <div class="fb-actions">
+    <button type="button" class="fb-btn approve">✓ Approve</button>
+    <button type="button" class="fb-btn note">✎ Add note</button>
+  </div>
+  <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+  <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+  <div class="fb-note-form">
+    <textarea placeholder="What needs changing? Be as specific as you like — Mel will see it straight away."></textarea>
+    <div class="fb-form-actions">
+      <button type="button" class="fb-cancel">Cancel</button>
+      <button type="button" class="fb-send">Send to Mel</button>
+    </div>
+  </div>
+</div>
         </div>
       </div>
 
@@ -329,17 +343,22 @@
             <div class="value"><span class="tbc">To confirm</span></div>
           </div>
 
-          <div class="feedback-row">
-            <div class="fb-label">Email 2 · Approval</div>
-            <div class="fb-actions">
-              <a class="fb-btn approve"
-                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Email%202%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0AEmail%202%20is%20approved.%20Send%20it.%0A%0A%E2%80%94"
-              >Approve email 2</a>
-              <a class="fb-btn changes"
-                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Email%202%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20Email%202%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
-              >Request changes</a>
-            </div>
-          </div>
+          <div class="feedback-row" data-section="Email 2">
+  <div class="fb-row-label">Email 2 · Approval</div>
+  <div class="fb-actions">
+    <button type="button" class="fb-btn approve">✓ Approve</button>
+    <button type="button" class="fb-btn note">✎ Add note</button>
+  </div>
+  <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+  <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+  <div class="fb-note-form">
+    <textarea placeholder="What needs changing? Be as specific as you like — Mel will see it straight away."></textarea>
+    <div class="fb-form-actions">
+      <button type="button" class="fb-cancel">Cancel</button>
+      <button type="button" class="fb-send">Send to Mel</button>
+    </div>
+  </div>
+</div>
         </div>
       </div>
 
@@ -379,17 +398,22 @@
             ></iframe>
           </div>
 
-          <div class="feedback-row">
-            <div class="fb-label">Change 01 · Approval</div>
-            <div class="fb-actions">
-              <a class="fb-btn approve"
-                 href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Web%20Change%2001%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0AWeb%20change%2001%20is%20approved.%20Push%20it%20live.%0A%0A%E2%80%94"
-              >Approve</a>
-              <a class="fb-btn changes"
-                 href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Web%20Change%2001%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20the%20following%20on%20web%20change%2001%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94"
-              >Request changes</a>
-            </div>
-          </div>
+          <div class="feedback-row" data-section="Change 01">
+  <div class="fb-row-label">Change 01 · Approval</div>
+  <div class="fb-actions">
+    <button type="button" class="fb-btn approve">✓ Approve</button>
+    <button type="button" class="fb-btn note">✎ Add note</button>
+  </div>
+  <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+  <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+  <div class="fb-note-form">
+    <textarea placeholder="What needs changing? Be as specific as you like — Mel will see it straight away."></textarea>
+    <div class="fb-form-actions">
+      <button type="button" class="fb-cancel">Cancel</button>
+      <button type="button" class="fb-send">Send to Mel</button>
+    </div>
+  </div>
+</div>
         </div>
 
       </div>
@@ -417,13 +441,22 @@
                 <div class="ph-sub">Add to this folder</div>
               </div>
             </div>
-            <div class="feedback-row">
-              <div class="fb-label">Creative 1A</div>
-              <div class="fb-actions">
-                <a class="fb-btn approve" href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Creative%201A%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACreative%201A%20is%20approved.%0A%0A%E2%80%94">Approve</a>
-                <a class="fb-btn changes" href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Creative%201A%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20Creative%201A%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94">Changes</a>
-              </div>
-            </div>
+            <div class="feedback-row" data-section="Creative 1A">
+  <div class="fb-row-label">Creative 1A</div>
+  <div class="fb-actions">
+    <button type="button" class="fb-btn approve">✓ Approve</button>
+    <button type="button" class="fb-btn note">✎ Add note</button>
+  </div>
+  <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+  <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+  <div class="fb-note-form">
+    <textarea placeholder="What needs changing? Be as specific as you like — Mel will see it straight away."></textarea>
+    <div class="fb-form-actions">
+      <button type="button" class="fb-cancel">Cancel</button>
+      <button type="button" class="fb-send">Send to Mel</button>
+    </div>
+  </div>
+</div>
           </div>
 
           <div class="creative-card">
@@ -439,13 +472,22 @@
                 <div class="ph-sub">Add to this folder</div>
               </div>
             </div>
-            <div class="feedback-row">
-              <div class="fb-label">Creative 1B</div>
-              <div class="fb-actions">
-                <a class="fb-btn approve" href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Creative%201B%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACreative%201B%20is%20approved.%0A%0A%E2%80%94">Approve</a>
-                <a class="fb-btn changes" href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Creative%201B%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20Creative%201B%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94">Changes</a>
-              </div>
-            </div>
+            <div class="feedback-row" data-section="Creative 1B">
+  <div class="fb-row-label">Creative 1B</div>
+  <div class="fb-actions">
+    <button type="button" class="fb-btn approve">✓ Approve</button>
+    <button type="button" class="fb-btn note">✎ Add note</button>
+  </div>
+  <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+  <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+  <div class="fb-note-form">
+    <textarea placeholder="What needs changing? Be as specific as you like — Mel will see it straight away."></textarea>
+    <div class="fb-form-actions">
+      <button type="button" class="fb-cancel">Cancel</button>
+      <button type="button" class="fb-send">Send to Mel</button>
+    </div>
+  </div>
+</div>
           </div>
 
         </div>
@@ -466,13 +508,22 @@
                 <div class="ph-sub">Add to this folder</div>
               </div>
             </div>
-            <div class="feedback-row">
-              <div class="fb-label">Creative 2A</div>
-              <div class="fb-actions">
-                <a class="fb-btn approve" href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Creative%202A%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACreative%202A%20is%20approved.%0A%0A%E2%80%94">Approve</a>
-                <a class="fb-btn changes" href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Creative%202A%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20Creative%202A%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94">Changes</a>
-              </div>
-            </div>
+            <div class="feedback-row" data-section="Creative 2A">
+  <div class="fb-row-label">Creative 2A</div>
+  <div class="fb-actions">
+    <button type="button" class="fb-btn approve">✓ Approve</button>
+    <button type="button" class="fb-btn note">✎ Add note</button>
+  </div>
+  <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+  <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+  <div class="fb-note-form">
+    <textarea placeholder="What needs changing? Be as specific as you like — Mel will see it straight away."></textarea>
+    <div class="fb-form-actions">
+      <button type="button" class="fb-cancel">Cancel</button>
+      <button type="button" class="fb-send">Send to Mel</button>
+    </div>
+  </div>
+</div>
           </div>
 
           <div class="creative-card">
@@ -488,13 +539,22 @@
                 <div class="ph-sub">Add to this folder</div>
               </div>
             </div>
-            <div class="feedback-row">
-              <div class="fb-label">Creative 2B</div>
-              <div class="fb-actions">
-                <a class="fb-btn approve" href="mailto:hello@theserviceedit.com?subject=APPROVED%20%C2%B7%20Creative%202B%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACreative%202B%20is%20approved.%0A%0A%E2%80%94">Approve</a>
-                <a class="fb-btn changes" href="mailto:hello@theserviceedit.com?subject=CHANGES%20%C2%B7%20Creative%202B%20%C2%B7%20Week%20of%208%20June%202026&amp;body=Hi%20Mel%2C%0A%0ACan%20we%20change%20Creative%202B%3A%0A%0A-%20%5Bwhat%20to%20change%5D%0A%0A%E2%80%94">Changes</a>
-              </div>
-            </div>
+            <div class="feedback-row" data-section="Creative 2B">
+  <div class="fb-row-label">Creative 2B</div>
+  <div class="fb-actions">
+    <button type="button" class="fb-btn approve">✓ Approve</button>
+    <button type="button" class="fb-btn note">✎ Add note</button>
+  </div>
+  <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+  <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+  <div class="fb-note-form">
+    <textarea placeholder="What needs changing? Be as specific as you like — Mel will see it straight away."></textarea>
+    <div class="fb-form-actions">
+      <button type="button" class="fb-cancel">Cancel</button>
+      <button type="button" class="fb-send">Send to Mel</button>
+    </div>
+  </div>
+</div>
           </div>
 
         </div>
@@ -509,5 +569,6 @@
   </main>
 
 </div>
+<script src="../../assets/feedback.js"></script>
 </body>
 </html>
