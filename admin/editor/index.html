@@ -397,6 +397,39 @@
 <body>
 
 
+
+<!-- EDITOR -->
+<div class="editor-shell">
+
+  <!-- MAIN FORM -->
+  <div class="editor-main">
+
+    <header class="editor-header">
+      <a href="../" class="editor-back">← Back to dashboard</a>
+      <div class="editor-label">Week editor</div>
+      <h1 class="editor-title">Build a week</h1>
+      <div class="editor-sub">Fill in what you've got. Auto-saves as you type. Generate a zip when you're done.</div>
+    </header>
+
+    <!-- 00 · WEEK DATE -->
+    <section class="form-section">
+      <div class="form-section-head">
+        <div class="form-section-num">00</div>
+        <div class="form-section-title">Week date</div>
+        <div class="form-section-help">Pick the Monday</div>
+      </div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Week starts (Monday) <span class="required">*</span></label>
+          <input type="date" id="f-week-date" required>
+          <div class="field-help">Pick the Monday of the week. The folder name updates automatically below.</div>
+        </div>
+        <div class="field">
+          <label>Folder name (auto)</label>
+          <input type="text" id="f-folder" readonly style="font-family: 'JetBrains Mono', monospace; background: var(--bg);">
+          <div class="field-help">Becomes <code>weeks/[this]/</code> in the repo.</div>
+        </div>
+      </div>
     </section>
 
     <!-- 01 · WEEKLY OVERVIEW -->
@@ -1324,12 +1357,15 @@ async function generateZip() {
   }
 }
 
-// Auto-init on load (no gate)
+// ============================================================
+// AUTO-INIT (no gate)
+// ============================================================
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initEditor);
 } else {
   initEditor();
 }
+
 </script>
 
 </body>
