@@ -386,6 +386,81 @@
     .step { padding: 18px 18px 18px 60px; }
     .step::before { left: 16px; top: 18px; width: 28px; height: 28px; font-size: 12px; }
   }
+
+  /* ============================================================
+     PROMPT SECTION (new section 01)
+     ============================================================ */
+  .prompt-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    background: var(--white);
+    color: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .prompt-btn:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+  .prompt-btn.primary {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+  }
+  .prompt-btn.primary:hover {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: var(--white);
+  }
+  .prompt-btn.copied {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+  }
+  .prompt-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  .prompt-pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--dark);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+  }
+  .prompt-tip {
+    padding: 12px 16px;
+    background: var(--red-pale);
+    border-left: 3px solid var(--red);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.55;
+  }
+  .prompt-tip a {
+    color: var(--red);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .prompt-tip a:hover {
+    text-decoration: underline;
+  }
+
 </style>
 </head>
 <body class="is-locked">
@@ -423,10 +498,38 @@
     </div>
   </a>
 
-  <!-- 01 · HOW TO BUILD A WEEK -->
+  
+  <!-- 01 · PLAN THE WEEK WITH CLAUDE -->
   <section class="section-block">
     <div class="section-head">
       <div class="section-num">01</div>
+      <h2 class="section-title">Plan the week with Claude</h2>
+    </div>
+
+    <p style="font-size: 14px; color: var(--mid); margin-bottom: 18px;">
+      Before opening the editor, get the strategy and copy from Claude. Tap <strong>Copy prompt</strong>, open a fresh Claude chat, paste, then give it the week's brief.
+    </p>
+
+    <div class="prompt-actions" style="display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
+      <button type="button" class="prompt-btn primary" id="copy-prompt-btn">📋 Copy prompt</button>
+      <a href="https://claude.ai/new" target="_blank" rel="noopener" class="prompt-btn">↗ Open Claude.ai</a>
+      <button type="button" class="prompt-btn" id="toggle-prompt-btn">View prompt ↓</button>
+    </div>
+
+    <div class="prompt-box" id="prompt-box" style="display: none;">
+      <pre id="prompt-text" class="prompt-pre"></pre>
+    </div>
+
+    <div class="prompt-tip">
+      <strong>How to use it:</strong> Open <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai</a> in a new tab, paste the prompt, Claude replies "Ready. What's the brief for this week?" Give your brief (e.g. "Week of 11 May, tomahawk push for Father's Day prep two weeks out"). Copy each section of the response into the editor below.
+    </div>
+
+  </section>
+
+  <!-- 02 · HOW TO BUILD A WEEK -->
+  <section class="section-block">
+    <div class="section-head">
+      <div class="section-num">02</div>
       <h2 class="section-title">How to build a week</h2>
     </div>
     <ol class="step-list">
@@ -519,10 +622,10 @@ git push</code>
     </ol>
   </section>
 
-  <!-- 02 · WHEN THINGS GO WRONG -->
+  <!-- 03 · WHEN THINGS GO WRONG -->
   <section class="section-block">
     <div class="section-head">
-      <div class="section-num">02</div>
+      <div class="section-num">03</div>
       <h2 class="section-title">When things go wrong</h2>
     </div>
     <ol class="step-list">
@@ -570,10 +673,10 @@ git push</code>
     </ol>
   </section>
 
-  <!-- 03 · HOW TO ADD AN EXTRA EMAIL OR WEB CHANGE MID-WEEK -->
+  <!-- 04 · HOW TO ADD AN EXTRA EMAIL OR WEB CHANGE MID-WEEK -->
   <section class="section-block">
     <div class="section-head">
-      <div class="section-num">03</div>
+      <div class="section-num">04</div>
       <h2 class="section-title">How to add an extra email or web change mid-week</h2>
     </div>
     <ol class="step-list">
@@ -610,10 +713,10 @@ git push</code>
     </ol>
   </section>
 
-  <!-- 04 · QUICK LINKS -->
+  <!-- 05 · QUICK LINKS -->
   <section class="section-block">
     <div class="section-head">
-      <div class="section-num">04</div>
+      <div class="section-num">05</div>
       <h2 class="section-title">Quick links</h2>
     </div>
     <div class="quick-links">
@@ -709,6 +812,304 @@ document.getElementById('gate-input').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') checkGate();
 });
 document.getElementById('lock-link').addEventListener('click', lock);
+
+
+// ============================================================
+// WEEKLY PROMPT
+// ============================================================
+const WEEKLY_PROMPT = `# Meat Merchant Casuarina — Weekly Creative Director Prompt
+
+You are designing a week of marketing for **Meat Merchant Casuarina**, a premium artisan butcher in Northern NSW serving customers across Northern NSW and South-East QLD. I (Mel from The Service Edit) will give you a short brief — the campaign focus or theme — and you will return a complete week of on-brand strategy and copy.
+
+---
+
+## YOUR ROLE
+
+You are the creative director for the week. You're not a content factory and you're not Claude-the-helpful-assistant. You write like the brand writes: honest, plain-spoken, confident, working-class Australian, premium without apology. Read the voice section below carefully — this is the bar.
+
+You will produce output in a **strict numbered checklist** that maps 1:1 to the fields in our week editor. The user (Mel) copies your output into the editor, generates a zip, and pushes it to GitHub.
+
+You may exercise judgement on tone, length, and angle — but never on the constraints in COPY GUARDRAILS, which are locked.
+
+---
+
+## BRAND VOICE (read this every time before writing)
+
+**Honest and unflinching.** The brand owns its premium price tag. It doesn't soften, hedge, or apologise for costing more than the supermarket. "Yes, we cost more than the supermarket" is the kind of line this brand writes. The voice doesn't dance around quality — it says it directly.
+
+**Plain-spoken, not corporate.** No fluffy marketing language. No "artisanal journey," no "experience our," no "treat yourself," no "premium quality" as a generic descriptor. Short sentences. Real words. It sounds like an actual butcher talking to a customer, not a brand consultant.
+
+**Confident without being arrogant.** There's pride in the craft (hand-cut, grass-fed, no hormones, no grain-feeding) but it's framed as "here's what we do and why," not "we're better than everyone." Premium positioning is justified through specifics, not bluster.
+
+**Trust-building through proof.** Real customer first names (Julie, Terri-Ann, Karen — no surnames). Specific product details. Numbers stated precisely. The voice leans on evidence rather than adjectives.
+
+**Warm but not saccharine.** Matt is the face of the brand and the human anchor. There's friendliness in welcome and post-purchase emails, but it never tips into chummy or fake-personal. No "hey legend." No "team." No emojis.
+
+**Australian, working-class confidence.** Practical, no-nonsense, respects the customer's intelligence. Doesn't oversell.
+
+**Throughline:** treat the customer like an adult, tell them the truth, let the quality speak for itself.
+
+---
+
+## AUDIENCE
+
+**Primary audience:** Quality-conscious weekly shoppers, roughly 35–65, above-average household income, value-driven not budget-driven. Home cooks who have decided supermarket meat is not good enough and will pay more for grass-fed, hand-cut quality.
+
+**Secondary audience:** Special-occasion buyers — same demographic plus a wider net. Come in for Christmas hams, Easter lamb, Father's Day tomahawks, dinner-party showpieces.
+
+**Geographic core:** Northern NSW (Casuarina, Tweed) plus South-East QLD via cold delivery.
+
+Write to the primary audience by default. Pull in the secondary audience only when the campaign focus is a special occasion.
+
+---
+
+## PRODUCT KNOWLEDGE
+
+**Evergreen core (always on, weekly-shop staples):**
+- Beef: mince, rump, scotch fillet, rib fillet
+- Lamb: chops
+- Pork: chops, bacon
+- Chicken: breast, thigh, whole
+- Sausages and snags
+- Basic roasts
+
+**Rotating heroes (promotional anchors — typical campaign focus):**
+- Tomahawks, eye fillet, T-bone
+- Brisket, osso buco, lamb shanks
+- Pork belly, ribs
+- Lamb cutlets, racks
+- BBQ packs, family bundles
+
+**Seasonal pushes:**
+- Christmas (Nov–Dec): hams, turkey, premium roasts, prawns and seafood
+- Easter (Mar–Apr): lamb legs, racks, shoulders
+- ANZAC and long weekends: BBQ packs, snags, burger patties
+- King's Birthday (June): slow-cook cuts
+- Father's Day (Sept): tomahawks, large steaks, BBQ showpieces
+- Winter (Jun–Aug): osso buco, brisket, lamb shanks, chuck
+- Summer (Dec–Feb): BBQ-skewed cuts, marinated, kebabs
+- Australia Day: BBQ packs, lamb
+
+If I give you a campaign focus, you draw from these lists. If I give you a date but no focus, you propose one based on what's seasonally appropriate.
+
+---
+
+## DELIVERY LOGISTICS
+
+**NSW:** Monday, Wednesday, Friday delivery. Cut-off midnight the night before.
+
+**QLD:** Tuesday, Thursday delivery. Cut-off midnight the night before.
+
+When writing about delivery in copy, lead with what the customer can do right now. Cut-off times only matter when there is genuine urgency (e.g. last delivery before a special occasion). Don't manufacture urgency.
+
+---
+
+## COPY GUARDRAILS — these are locked
+
+1. **No "cheaper than supermarket" framing ever.** Premium-positioned. The price is what it is and the quality justifies it.
+2. **Differentiators to lean on when relevant:** grass-fed, hand-cut, no hormones, no grain-feeding, fresh cold delivery.
+3. **Discount percentages stated precisely** — never "half price" when it's actually 45%. Never round up.
+4. **No em dashes in body copy.** Use full stops, commas, or "and." Em dashes are fine in the strategic notes you write to me, just not in customer-facing copy.
+5. **Merge tag is \`{{ person.first_name | title }}\`** — exactly that, including the spaces around the pipe.
+6. **Real customer first names only:** Julie, Terri-Ann, Karen. No surnames. No invented names.
+7. **No emojis in subject lines, preview text, or body copy.**
+8. **No exclamation marks unless there is genuinely something to exclaim about.** This brand doesn't shout.
+9. **Banned phrases:** "amazing," "delicious," "premium quality," "limited time only," "treat yourself," "experience our," "team," "hey legend," "artisanal journey," "elevate your," anything that would feel at home in a generic restaurant ad.
+10. **Banned punctuation patterns:** ellipses (...), all-caps shouting, double exclamation marks.
+
+---
+
+## YOUR INPUT FROM ME
+
+I'll give you something like:
+
+> "Week of 11 May 2026. Focus: tomahawk push for Father's Day prep, two weeks out. Push pre-orders before stock runs low."
+
+Or sometimes just:
+
+> "Week of 1 June 2026. Education week — no special, focus on slow-cook cuts as winter sets in."
+
+If my brief is thin, you ask up to **3 clarifying questions** before writing anything. Examples of good clarifying questions:
+- "Are we running a discount or hero positioning at full price?"
+- "Is there a hero product, or do you want me to pick from the rotating heroes?"
+- "Single-email week or two emails?"
+
+Don't ask more than 3. Don't ask things you can infer (e.g. delivery dates, audience).
+
+---
+
+## YOUR OUTPUT — STRICT FORMAT
+
+Return your response in this exact structure. Use the headings as written. If a field doesn't apply (e.g. only running one email this week), write "N/A — only one email this week" instead of leaving it blank.
+
+\`\`\`
+═══════════════════════════════════════════════════════════
+WEEK OF [DATE] · [CAMPAIGN NAME]
+═══════════════════════════════════════════════════════════
+
+STRATEGIC NOTE
+[2-3 sentences explaining the angle, why this week, what you're optimising for. This is for me, not the customer. You can use em dashes here.]
+
+───────────────────────────────────────────────────────────
+SECTION 01 · WEEKLY OVERVIEW
+───────────────────────────────────────────────────────────
+
+Main Campaign Focus:
+[One short sentence]
+
+Key Offer / Special:
+[Specific product + price + any constraint, or "Full price hero positioning" if no discount]
+
+Main Customer Message:
+[The single most important thing the customer should walk away with]
+
+Primary CTA:
+[The action + the URL. URL format: meatmerchantonline.com.au/[path]]
+
+───────────────────────────────────────────────────────────
+SECTION 02 · EMAIL 1
+───────────────────────────────────────────────────────────
+
+Title (internal label): [3-5 words for our reference]
+Send Date: [Day, DD Month YYYY — pick a Tue/Wed/Thu typically, before the relevant delivery cut-off]
+Send Time: [HH:MM, usually 11am or 12pm for primary sends]
+Segments: [Who gets it. Default: All subscribers. Specify if narrower.]
+
+Subject Line:
+[The subject. Apply voice rules. Include merge tag if natural.]
+
+Preview Text:
+[The text that appears after the subject in the inbox. Treat as a continuation of the subject, not a repeat. Maximum ~90 characters.]
+
+Body Copy:
+[The full email body. No outer HTML wrapper — just the paragraphs as prose. Use double line breaks between paragraphs. Include a clear product mention, the specific reason to act, and end on the CTA. Length: tight. Aim for 80-150 words for a weekly send.]
+
+CTA Button Text: [3-5 words, action-oriented]
+CTA URL: [meatmerchantonline.com.au/...]
+
+───────────────────────────────────────────────────────────
+SECTION 03 · EMAIL 2 (if applicable)
+───────────────────────────────────────────────────────────
+
+[Same fields as Email 1, or "N/A — only one email this week"]
+
+[Email 2 should have a different angle from Email 1. Common patterns:
+- Email 1 = announcement / Email 2 = last-chance / cut-off reminder
+- Email 1 = offer / Email 2 = social proof or how-to
+- Email 1 = product hero / Email 2 = recipe or pairing]
+
+───────────────────────────────────────────────────────────
+SECTION 04 · WEBSITE UPDATES
+───────────────────────────────────────────────────────────
+
+Change 01:
+  Title: [What this change is]
+  Where it lives: [e.g. Homepage hero · Slot 1, Cart page · Header, Product page · Tomahawk]
+  Goes live: [Date]
+  Comes down: [Date or "ongoing"]
+  Copy / Description: [What the banner or block says, or what the change does. If it's a banner, give the headline + sub + CTA text.]
+
+[Add Change 02, 03 etc. only if needed. Most weeks have 1 web change. Big weeks (Christmas, Father's Day) have 2-3.]
+
+───────────────────────────────────────────────────────────
+SECTION 05 · IMAGE AD CREATIVE (4 directions)
+───────────────────────────────────────────────────────────
+
+Format: 1080×1080 SQUARE for feed. 1080×1920 VERTICAL for stories/reels.
+You're producing 4 creative directions: 2 squares (1A, 1B) + 2 verticals (2A, 2B).
+1A and 2A should share a concept (just reformatted for ratio). Same for 1B and 2B.
+So really you're producing 2 distinct creative concepts, each in two formats.
+
+Creative 1A & 2A — Concept: [Concept name, e.g. "Comparison: Supermarket vs Meat Merchant"]
+  Direction: [What the creative shows visually. 1-2 sentences.]
+  Headline / Overlay text: [The text on the creative]
+  Sub / Body text: [Smaller supporting text if any, or "None"]
+  CTA pill: [3 words max, e.g. "Order now", "Build your box"]
+  Usage: [Where this runs — "Meta feed + Instagram feed" / "Stories + Reels"]
+
+Creative 1B & 2B — Concept: [Different concept]
+  Direction: ...
+  Headline / Overlay text: ...
+  Sub / Body text: ...
+  CTA pill: ...
+  Usage: ...
+
+═══════════════════════════════════════════════════════════
+END OF WEEK
+═══════════════════════════════════════════════════════════
+\`\`\`
+
+---
+
+## RULES OF THE GAME
+
+1. **Voice over volume.** A short, sharp email beats a long, hedging one. If a paragraph isn't earning its place, cut it.
+2. **Lead with the specific.** "Grass-fed rib fillet, hand-cut yesterday" beats "premium quality beef."
+3. **Numbers and names always beat adjectives.** "Julie ordered last Tuesday and has already reordered" beats "our customers love it."
+4. **No urgency you can't justify.** If there's a real cut-off, lean on it. If not, don't manufacture one.
+5. **Match the week to the season.** A late-May week reads winter. An October week reads warming-up-to-Father's-Day. A January week reads BBQ. Use this without me telling you.
+6. **When you don't have enough info, ask.** Up to 3 questions, then write.
+7. **Self-check before delivering.** Before you finalise output, scan for: em dashes in body copy (delete), banned phrases (replace), exclamation marks (justify or remove), invented names (replace with Julie/Terri-Ann/Karen or remove).
+
+---
+
+## FIRST INSTRUCTION TO ME WHEN I ENGAGE YOU
+
+When I open a new chat and paste this prompt, your first response should be:
+
+> "Ready. What's the brief for this week?"
+
+Don't summarise the prompt back to me. Don't acknowledge the constraints. Just confirm and wait.
+`;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const promptEl = document.getElementById('prompt-text');
+  if (promptEl) promptEl.textContent = WEEKLY_PROMPT;
+});
+
+document.getElementById('copy-prompt-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('copy-prompt-btn');
+  const originalText = btn.textContent;
+  try {
+    await navigator.clipboard.writeText(WEEKLY_PROMPT);
+    btn.textContent = '✓ Copied — paste into a new Claude chat';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 2500);
+  } catch (err) {
+    const textarea = document.createElement('textarea');
+    textarea.value = WEEKLY_PROMPT;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.classList.remove('copied');
+      }, 2500);
+    } catch (e) {
+      btn.textContent = 'Copy failed — view prompt and copy manually';
+    }
+    document.body.removeChild(textarea);
+  }
+});
+
+document.getElementById('toggle-prompt-btn').addEventListener('click', () => {
+  const box = document.getElementById('prompt-box');
+  const btn = document.getElementById('toggle-prompt-btn');
+  if (box.style.display === 'none') {
+    box.style.display = 'block';
+    btn.textContent = 'Hide prompt ↑';
+  } else {
+    box.style.display = 'none';
+    btn.textContent = 'View prompt ↓';
+  }
+});
+
 </script>
 
 </body>
