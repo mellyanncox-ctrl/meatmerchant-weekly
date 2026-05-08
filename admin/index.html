@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | Meat Merchant Casuarina</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #af3630;
+    --red-light: #c14d47;
+    --red-pale: #fff4f3;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --light: #888;
+    --border: #ececec;
+    --bg: #fafafa;
+    --white: #ffffff;
+    --green: #4a7c59;
+    --error: #b04a3a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ============================================================
+     PASSCODE GATE
+     ============================================================ */
+  .gate {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .gate-card {
+    max-width: 420px;
+    width: 100%;
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .gate-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 6px; height: 100%;
+    background: var(--red);
+  }
+  .gate-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .gate-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .gate-sub {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 24px;
+  }
+  .gate-input {
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--white);
+    color: var(--dark);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+  .gate-input:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(175,54,48,0.12);
+  }
+  .gate-error {
+    color: var(--error);
+    font-size: 12px;
+    font-weight: 700;
+    min-height: 18px;
+    margin-bottom: 6px;
+  }
+  .gate-btn {
+    width: 100%;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .gate-btn:hover { background: var(--dark); }
+
+  body.is-locked .admin-shell { display: none; }
+  body.is-unlocked .gate { display: none; }
+
+  /* ============================================================
+     ADMIN SHELL
+     ============================================================ */
+  .admin-shell {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 28px 80px;
+  }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  .admin-header {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .admin-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .admin-title {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .admin-sub {
+    font-size: 15px;
+    color: var(--mid);
+  }
+
+  /* ============================================================
+     HERO ACTION (the big "Open editor" button)
+     ============================================================ */
+  .hero-action {
+    display: block;
+    background: var(--dark);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 48px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .hero-action::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 0;
+    width: 6px; height: 100%;
+    background: var(--red);
+  }
+  .hero-action:hover {
+    background: #2a2a2a;
+    transform: translateY(-2px);
+  }
+  .hero-action-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-action-mark {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .hero-action-title {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+  .hero-action-sub {
+    font-size: 14px;
+    color: #c7c2bd;
+    max-width: 480px;
+  }
+  .hero-action-arrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--red);
+    white-space: nowrap;
+  }
+
+  /* ============================================================
+     SECTION BLOCKS
+     ============================================================ */
+  .section-block {
+    margin-bottom: 48px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.04em;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--dark);
+  }
+
+  /* ============================================================
+     STEP LIST (numbered workflow steps)
+     ============================================================ */
+  .step-list {
+    list-style: none;
+    counter-reset: stepcounter;
+  }
+  .step {
+    counter-increment: stepcounter;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 24px 22px 70px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .step::before {
+    content: counter(stepcounter);
+    position: absolute;
+    left: 22px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--red-pale);
+    color: var(--red);
+    border-radius: 50%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .step-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .step-body {
+    font-size: 14px;
+    color: var(--mid);
+  }
+  .step-body strong { color: var(--dark); font-weight: 700; }
+  .step-body code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    background: #f5f0ee;
+    color: var(--dark);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+  .step-body code.cmd {
+    display: block;
+    padding: 12px 14px;
+    margin-top: 10px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .step-tip {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--red-pale);
+    border-left: 3px solid var(--red);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--mid);
+  }
+
+  /* ============================================================
+     QUICK LINKS
+     ============================================================ */
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .quick-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .quick-link:hover {
+    border-color: var(--red);
+    transform: translateY(-1px);
+  }
+  .quick-link-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--dark);
+  }
+  .quick-link-sub {
+    font-size: 12px;
+    color: var(--light);
+    margin-top: 2px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .quick-link-arrow {
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  /* ============================================================
+     ADMIN FOOT
+     ============================================================ */
+  .admin-foot {
+    text-align: center;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--light);
+  }
+  .admin-foot a {
+    color: var(--red);
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .admin-foot a:hover { text-decoration: underline; }
+
+  /* ============================================================
+     MOBILE
+     ============================================================ */
+  @media (max-width: 600px) {
+    .admin-shell { padding: 32px 18px 48px; }
+    .admin-title { font-size: 28px; }
+    .hero-action { padding: 24px; }
+    .hero-action-title { font-size: 18px; }
+    .step { padding: 18px 18px 18px 60px; }
+    .step::before { left: 16px; top: 18px; width: 28px; height: 28px; font-size: 12px; }
+  }
+</style>
+</head>
+<body class="is-locked">
+
+<!-- GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-label">Admin access</div>
+    <h1 class="gate-title">Meat Merchant Casuarina</h1>
+    <div class="gate-sub">Enter passcode to continue.</div>
+    <input type="password" id="gate-input" class="gate-input" placeholder="passcode" autocomplete="off" autofocus>
+    <div class="gate-error" id="gate-error">&nbsp;</div>
+    <button class="gate-btn" id="gate-btn" type="button">Unlock</button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-shell">
+
+  <header class="admin-header">
+    <div class="admin-label">Admin dashboard</div>
+    <h1 class="admin-title">Hi Mel.</h1>
+    <div class="admin-sub">Editor, workflow, and quick links for the Meat Merchant hub.</div>
+  </header>
+
+  <!-- BIG BUTTON: OPEN EDITOR -->
+  <a href="editor/" class="hero-action">
+    <div class="hero-action-row">
+      <div class="hero-action-text">
+        <div class="hero-action-mark">Build a week</div>
+        <div class="hero-action-title">Open the week editor</div>
+        <div class="hero-action-sub">Fill in the form, generate a zip, drop it into the right week folder.</div>
+      </div>
+      <div class="hero-action-arrow">Open editor →</div>
+    </div>
+  </a>
+
+  <!-- 01 · HOW TO BUILD A WEEK -->
+  <section class="section-block">
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <h2 class="section-title">How to build a week</h2>
+    </div>
+    <ol class="step-list">
+
+      <li class="step">
+        <div class="step-title">Open the editor</div>
+        <div class="step-body">
+          Click "Open editor" above. If you've worked on this week before, click <strong>Load draft</strong> to pick up where you left off.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Set the week date (section 00)</div>
+        <div class="step-body">
+          Pick the Monday of the week. The folder name updates automatically to <code>YYYY-MM-DD</code>.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Fill in the Weekly Overview (section 01)</div>
+        <div class="step-body">
+          Five fields: <strong>main campaign focus</strong>, <strong>key offer</strong>, <strong>main customer message</strong>, <strong>primary CTA</strong>. <strong>Leave fields blank</strong> if you're not ready — they'll show as "To confirm" pills on the page.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Fill in Emails 1 and 2 (sections 02 + 03)</div>
+        <div class="step-body">
+          For each email: title, send day + time, segments, subject, preview, then paste the email HTML body. Auto-saves to your browser as you type, so you can close the tab and come back.
+          <div class="step-tip"><strong>Email HTML:</strong> paste the Klaviyo body content (style block + body), no outer shell. Subjects support Klaviyo merge tags like <code>{{ first_name|title }}</code>.</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Add website updates (section 04)</div>
+        <div class="step-body">
+          Click <strong>Add web change</strong> for each one. Title, where it lives, paste the HTML banner code. Add as many as you need this week — most weeks have 1, big weeks have 3.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Drop in the four creatives (section 05)</div>
+        <div class="step-body">
+          Two square (1080×1080) for feed, two vertical (1080×1920) for stories/reels. Drop them in the upload boxes. They'll render in place so you can see them before generating.
+          <div class="step-tip"><strong>Files:</strong> JPG or PNG. Stories must be 1080×1920 to look right on phones.</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Preview before generating</div>
+        <div class="step-body">
+          Click <strong>Preview</strong> in the editor. A new tab opens showing exactly what Matt and Harry will see. If it looks right, close the tab and continue.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Generate the zip</div>
+        <div class="step-body">
+          Click <strong>Generate zip</strong>. A file called <code>week-YYYY-MM-DD.zip</code> downloads to your Downloads folder.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Drop it into the repo</div>
+        <div class="step-body">
+          Open Terminal and run:
+          <code class="cmd">cd ~/APPS/meatmerchant-weekly
+unzip -o ~/Downloads/week-YYYY-MM-DD.zip -d weeks/YYYY-MM-DD/</code>
+          Replace <code>YYYY-MM-DD</code> with the week's Monday. The <code>-o</code> flag overwrites, the <code>-d</code> flag puts files in the right folder.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Push to GitHub</div>
+        <div class="step-body">
+          <code class="cmd">git add .
+git commit -m "Week of [date]"
+git push</code>
+          Live within ~30 seconds at <code>mellyanncox-ctrl.github.io/meatmerchant-weekly/weeks/YYYY-MM-DD/</code>.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Send Matt and Harry the link</div>
+        <div class="step-body">
+          Drop the link in the WhatsApp group. They review, hit Approve or Add note on each section, you get the email instantly via Web3Forms.
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- 02 · WHEN THINGS GO WRONG -->
+  <section class="section-block">
+    <div class="section-head">
+      <div class="section-num">02</div>
+      <h2 class="section-title">When things go wrong</h2>
+    </div>
+    <ol class="step-list">
+
+      <li class="step">
+        <div class="step-title">Image not showing on live site</div>
+        <div class="step-body">
+          GitHub Pages is case-sensitive. If the file is <code>CREATIVE-1A.JPG</code> but the page wants <code>creative-1a.jpg</code>, it 404s. Fix:
+          <code class="cmd">cd ~/APPS/meatmerchant-weekly/weeks/YYYY-MM-DD
+git mv CREATIVE-1A.JPG creative-1a.jpg
+git commit -m "lowercase filename"
+git push</code>
+          Use <code>git mv</code> not plain <code>mv</code> — macOS is case-insensitive locally so plain <code>mv</code> does nothing.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Email iframe shows blank in the preview</div>
+        <div class="step-body">
+          The email HTML you pasted probably has an outer <code>&lt;html&gt;</code> wrapper that conflicts with the iframe. Strip it down to just the style block + body content. Also check that any external image URLs (CDN-hosted, etc.) actually load — broken images render as nothing.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Editor draft is gone</div>
+        <div class="step-body">
+          Drafts live in the browser's localStorage, scoped to the device + browser you used. They survive tab closes and computer restarts, but not browser changes (Chrome → Safari) or clearing site data. If you've lost a draft, regenerate from your notes — there's no recovery.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Pushed but the live site hasn't updated</div>
+        <div class="step-body">
+          GitHub Pages takes 30–60 seconds to rebuild. If still nothing after 2 minutes, check <a href="https://github.com/mellyanncox-ctrl/meatmerchant-weekly/actions" target="_blank">GitHub Actions</a> for a failed deploy or a stuck queue.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Feedback button does nothing on a phone</div>
+        <div class="step-body">
+          Hard-refresh by closing the tab completely and reopening. Mobile browsers cache JS aggressively. If still broken, check the Web3Forms dashboard for failed submissions.
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- 03 · HOW TO ADD AN EXTRA EMAIL OR WEB CHANGE MID-WEEK -->
+  <section class="section-block">
+    <div class="section-head">
+      <div class="section-num">03</div>
+      <h2 class="section-title">How to add an extra email or web change mid-week</h2>
+    </div>
+    <ol class="step-list">
+
+      <li class="step">
+        <div class="step-title">Re-open the editor for that week</div>
+        <div class="step-body">
+          Open the editor, set the week date to that Monday, and hit <strong>Load draft</strong> if your draft is still there. Otherwise you'll need to re-fill the existing fields (or just edit the live <code>weeks/YYYY-MM-DD/index.html</code> directly in your code editor for small changes).
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Add the new content</div>
+        <div class="step-body">
+          For an extra web change: hit <strong>Add web change</strong> and fill in the fields. For an extra email: there's no Email 3 slot in v1 — manually duplicate Email 2's HTML block in the live page or come find me to add Email 3 support.
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Generate and replace</div>
+        <div class="step-body">
+          Generate zip, unzip with the same <code>-o</code> overwrite flag into the same folder. Commit + push.
+          <div class="step-tip"><strong>Heads up:</strong> overwriting will replace any manual edits you made directly to the live HTML. Always edit through the editor when possible.</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-title">Tell Matt and Harry what changed</div>
+        <div class="step-body">
+          Drop a quick "added [thing] to [section]" message in WhatsApp so they don't have to hunt for the difference.
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- 04 · QUICK LINKS -->
+  <section class="section-block">
+    <div class="section-head">
+      <div class="section-num">04</div>
+      <h2 class="section-title">Quick links</h2>
+    </div>
+    <div class="quick-links">
+      <a href="../" class="quick-link" target="_blank">
+        <div>
+          <div class="quick-link-title">Live site (homepage)</div>
+          <div class="quick-link-sub">/meatmerchant-weekly/</div>
+        </div>
+        <span class="quick-link-arrow">↗</span>
+      </a>
+      <a href="editor/" class="quick-link">
+        <div>
+          <div class="quick-link-title">Week editor</div>
+          <div class="quick-link-sub">/admin/editor/</div>
+        </div>
+        <span class="quick-link-arrow">→</span>
+      </a>
+      <a href="https://github.com/mellyanncox-ctrl/meatmerchant-weekly" class="quick-link" target="_blank">
+        <div>
+          <div class="quick-link-title">GitHub repo</div>
+          <div class="quick-link-sub">mellyanncox-ctrl/meatmerchant-weekly</div>
+        </div>
+        <span class="quick-link-arrow">↗</span>
+      </a>
+      <a href="https://github.com/mellyanncox-ctrl/meatmerchant-weekly/actions" class="quick-link" target="_blank">
+        <div>
+          <div class="quick-link-title">Deploy status</div>
+          <div class="quick-link-sub">GitHub Actions</div>
+        </div>
+        <span class="quick-link-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="admin-foot">
+    Session unlocked. <a id="lock-link">Lock again</a>.
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// PASSCODE GATE
+// SHA-256 of "!MeatMerchant!"
+// ============================================================
+const HASH = '1630ddb8d90cd618ae30beceabab365a3e81c2da5b836c281957a4010db0b6f5';
+const SESSION_KEY = 'mm-admin-unlocked';
+
+async function sha256(text) {
+  const buf = new TextEncoder().encode(text);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+function unlock() {
+  document.body.classList.remove('is-locked');
+  document.body.classList.add('is-unlocked');
+  document.getElementById('gate').style.display = 'none';
+  sessionStorage.setItem(SESSION_KEY, '1');
+}
+
+function lock() {
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+async function checkGate() {
+  const input = document.getElementById('gate-input');
+  const error = document.getElementById('gate-error');
+  const value = input.value;
+  if (!value) {
+    error.textContent = 'Enter a passcode.';
+    return;
+  }
+  const hash = await sha256(value);
+  if (hash === HASH) {
+    error.textContent = '';
+    unlock();
+  } else {
+    error.textContent = 'Wrong passcode.';
+    input.select();
+  }
+}
+
+if (sessionStorage.getItem(SESSION_KEY) === '1') {
+  unlock();
+}
+
+document.getElementById('gate-btn').addEventListener('click', checkGate);
+document.getElementById('gate-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') checkGate();
+});
+document.getElementById('lock-link').addEventListener('click', lock);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Week editor | Meat Merchant Casuarina</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  :root {
+    --red: #af3630;
+    --red-light: #c14d47;
+    --red-pale: #fff4f3;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --light: #888;
+    --border: #ececec;
+    --bg: #fafafa;
+    --white: #ffffff;
+    --green: #4a7c59;
+    --green-pale: #e6f4ec;
+    --error: #b04a3a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ============================================================
+     PASSCODE GATE (same as dashboard)
+     ============================================================ */
+  .gate {
+    position: fixed; inset: 0;
+    background: var(--dark);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .gate-card {
+    max-width: 420px; width: 100%;
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .gate-card::before {
+    content: ''; position: absolute;
+    left: 0; top: 0;
+    width: 6px; height: 100%;
+    background: var(--red);
+  }
+  .gate-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 10px;
+  }
+  .gate-title {
+    font-size: 22px; font-weight: 900;
+    color: var(--dark); line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .gate-sub { font-size: 13px; color: var(--mid); margin-bottom: 24px; }
+  .gate-input {
+    width: 100%; font-family: 'JetBrains Mono', monospace;
+    font-size: 16px; padding: 12px 14px;
+    border: 1px solid var(--border); border-radius: 5px;
+    background: var(--white); color: var(--dark);
+    margin-bottom: 12px; letter-spacing: 0.05em;
+  }
+  .gate-input:focus {
+    outline: none; border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(175,54,48,0.12);
+  }
+  .gate-error {
+    color: var(--error); font-size: 12px; font-weight: 700;
+    min-height: 18px; margin-bottom: 6px;
+  }
+  .gate-btn {
+    width: 100%; background: var(--red); color: var(--white);
+    border: none; padding: 12px; border-radius: 5px;
+    font-family: inherit; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+  }
+  .gate-btn:hover { background: var(--dark); }
+
+  body.is-locked .editor-shell { display: none; }
+  body.is-unlocked .gate { display: none; }
+
+  /* ============================================================
+     EDITOR LAYOUT
+     ============================================================ */
+  .editor-shell {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 32px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 32px 28px 80px;
+    align-items: start;
+  }
+
+  /* ============================================================
+     SIDEBAR
+     ============================================================ */
+  .editor-side {
+    position: sticky;
+    top: 32px;
+    background: var(--dark);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .side-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 8px;
+  }
+  .side-title {
+    font-size: 18px; font-weight: 900;
+    line-height: 1.2; margin-bottom: 4px;
+  }
+  .side-folder {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: #c7c2bd;
+    margin-bottom: 24px;
+  }
+  .side-actions { display: flex; flex-direction: column; gap: 10px; }
+  .side-btn {
+    display: block; padding: 12px 16px;
+    background: var(--white); color: var(--dark);
+    border: none; border-radius: 5px;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    text-align: center; text-decoration: none; cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .side-btn:hover { background: var(--red); color: var(--white); }
+  .side-btn.primary { background: var(--red); color: var(--white); }
+  .side-btn.primary:hover { background: var(--white); color: var(--dark); }
+  .side-btn.secondary {
+    background: transparent; color: var(--white);
+    border: 1px solid #444;
+  }
+  .side-btn.secondary:hover { background: #2a2a2a; border-color: var(--white); }
+  .side-btn.danger {
+    background: transparent; color: #c14d47;
+    border: 1px solid #c14d47; font-size: 11px;
+  }
+  .side-btn.danger:hover { background: #c14d47; color: var(--white); }
+
+  .side-status {
+    margin-top: 18px; padding-top: 18px;
+    border-top: 1px solid #333;
+    font-size: 12px; color: #c7c2bd;
+    line-height: 1.5;
+  }
+  .side-status .ok { color: #8fb9a0; }
+
+  /* ============================================================
+     MAIN FORM
+     ============================================================ */
+  .editor-main { min-width: 0; }
+
+  .editor-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .editor-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 8px;
+  }
+  .editor-title {
+    font-size: 30px; font-weight: 900;
+    color: var(--dark); line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .editor-sub { font-size: 14px; color: var(--mid); }
+  .editor-back {
+    font-size: 12px; color: var(--red);
+    text-decoration: none; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    margin-bottom: 14px; display: inline-block;
+  }
+  .editor-back:hover { text-decoration: underline; }
+
+  /* Form sections */
+  .form-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .form-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    color: var(--red); letter-spacing: 0.04em;
+  }
+  .form-section-title {
+    font-size: 18px; font-weight: 900;
+    color: var(--dark);
+  }
+  .form-section-help {
+    font-size: 13px; color: var(--light);
+    margin-left: auto;
+  }
+
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block; font-size: 12px; font-weight: 700;
+    color: var(--mid); margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .field label .required { color: var(--red); }
+  .field input[type="text"],
+  .field input[type="date"],
+  .field input[type="time"],
+  .field textarea,
+  .field select {
+    width: 100%; font-family: inherit; font-size: 14px;
+    padding: 10px 12px; border: 1px solid var(--border);
+    border-radius: 5px; background: var(--white); color: var(--dark);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none; border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(175,54,48,0.10);
+  }
+  .field textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+  .field textarea.code-area {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: #f9f7f6; line-height: 1.5; min-height: 200px;
+  }
+  .field-pair {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .field-help {
+    font-size: 12px; color: var(--light);
+    margin-top: 4px; line-height: 1.4;
+  }
+
+  /* Web change cards */
+  .web-change-list { display: flex; flex-direction: column; gap: 14px; }
+  .web-change-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px;
+    position: relative;
+  }
+  .web-change-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .web-change-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    color: var(--red);
+  }
+  .remove-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--light);
+    font-family: inherit; font-size: 11px;
+    font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 5px 10px; border-radius: 3px;
+    cursor: pointer;
+  }
+  .remove-btn:hover {
+    background: var(--error); color: var(--white);
+    border-color: var(--error);
+  }
+  .add-btn {
+    width: 100%;
+    background: transparent;
+    border: 2px dashed var(--border);
+    color: var(--red);
+    padding: 14px;
+    border-radius: 6px;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    cursor: pointer; margin-top: 12px;
+  }
+  .add-btn:hover {
+    border-color: var(--red);
+    background: var(--red-pale);
+  }
+
+  /* Image upload */
+  .image-uploads {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .image-uploads h4 {
+    grid-column: 1 / -1;
+    font-size: 12px; font-weight: 700;
+    color: var(--mid); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-top: 4px;
+  }
+  .image-uploads h4:first-of-type { margin-top: 0; }
+  .image-drop {
+    aspect-ratio: 1;
+    background: var(--bg);
+    border: 2px dashed var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .image-drop.vertical { aspect-ratio: 9 / 16; }
+  .image-drop:hover {
+    border-color: var(--red);
+    background: var(--red-pale);
+  }
+  .image-drop.has-image { border-style: solid; padding: 0; }
+  .image-drop img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .image-drop-placeholder {
+    text-align: center; padding: 12px;
+  }
+  .image-drop-placeholder .icon {
+    font-size: 28px; color: var(--red); font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .image-drop-placeholder .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--mid); font-weight: 700;
+  }
+  .image-drop-placeholder .sub {
+    font-size: 10px; color: var(--light);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .image-drop input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer;
+  }
+  .image-drop-clear {
+    position: absolute; top: 6px; right: 6px;
+    background: rgba(0,0,0,0.7); color: var(--white);
+    border: none; border-radius: 50%;
+    width: 24px; height: 24px;
+    font-size: 14px; cursor: pointer;
+    display: none;
+  }
+  .image-drop.has-image .image-drop-clear { display: block; }
+
+  /* ============================================================
+     MOBILE
+     ============================================================ */
+  @media (max-width: 900px) {
+    .editor-shell { grid-template-columns: 1fr; }
+    .editor-side {
+      position: relative; top: auto;
+      order: -1;
+    }
+  }
+  @media (max-width: 600px) {
+    .editor-shell { padding: 18px 14px 48px; }
+    .editor-title { font-size: 24px; }
+    .form-section { padding: 20px; }
+    .field-pair { grid-template-columns: 1fr; }
+    .image-uploads { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="is-locked">
+
+<!-- GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-label">Admin access</div>
+    <h1 class="gate-title">Week editor</h1>
+    <div class="gate-sub">Enter passcode to continue.</div>
+    <input type="password" id="gate-input" class="gate-input" placeholder="passcode" autocomplete="off" autofocus>
+    <div class="gate-error" id="gate-error">&nbsp;</div>
+    <button class="gate-btn" id="gate-btn" type="button">Unlock</button>
+  </div>
+</div>
+
+<!-- EDITOR -->
+<div class="editor-shell">
+
+  <!-- MAIN FORM -->
+  <div class="editor-main">
+
+    <header class="editor-header">
+      <a href="../" class="editor-back">← Back to dashboard</a>
+      <div class="editor-label">Week editor</div>
+      <h1 class="editor-title">Build a week</h1>
+      <div class="editor-sub">Fill in what you've got. Auto-saves as you type. Generate a zip when you're done.</div>
+    </header>
+
+    <!-- 00 · WEEK DATE -->
+    <section class="form-section">
+      <div class="form-section-head">
+        <div class="form-section-num">00</div>
+        <div class="form-section-title">Week date</div>
+        <div class="form-section-help">Pick the Monday</div>
+      </div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Week starts (Monday) <span class="required">*</span></label>
+          <input type="date" id="f-week-date" required>
+          <div class="field-help">Pick the Monday of the week. The folder name updates automatically below.</div>
+        </div>
+        <div class="field">
+          <label>Folder name (auto)</label>
+          <input type="text" id="f-folder" readonly style="font-family: 'JetBrains Mono', monospace; background: var(--bg);">
+          <div class="field-help">Becomes <code>weeks/[this]/</code> in the repo.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 · WEEKLY OVERVIEW -->
+    <section class="form-section">
+      <div class="form-section-head">
+        <div class="form-section-num">01</div>
+        <div class="form-section-title">Weekly Overview</div>
+        <div class="form-section-help">Leave blank for "To confirm"</div>
+      </div>
+      <div class="field">
+        <label>Main Campaign Focus</label>
+        <input type="text" id="f-overview-focus" placeholder="e.g. Mother's Day weekend & Rib Fillet Special">
+      </div>
+      <div class="field">
+        <label>Key Offer / Special</label>
+        <input type="text" id="f-overview-offer" placeholder="e.g. $39.99/KG Rib Fillet">
+      </div>
+      <div class="field">
+        <label>Main Customer Message</label>
+        <input type="text" id="f-overview-message" placeholder="What we want them to take away">
+      </div>
+      <div class="field">
+        <label>Primary CTA</label>
+        <input type="text" id="f-overview-cta" placeholder="e.g. Order for Mother's Day → meatmerchantonline.com.au/build-your-box">
+      </div>
+    </section>
+
+    <!-- 02 · EMAIL 1 -->
+    <section class="form-section">
+      <div class="form-section-head">
+        <div class="form-section-num">02</div>
+        <div class="form-section-title">Email 1</div>
+      </div>
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="f-email1-title" placeholder="e.g. Mother's Day Email">
+      </div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Send date</label>
+          <input type="date" id="f-email1-date">
+        </div>
+        <div class="field">
+          <label>Send time</label>
+          <input type="time" id="f-email1-time">
+        </div>
+      </div>
+      <div class="field">
+        <label>Segments</label>
+        <input type="text" id="f-email1-segments" placeholder="e.g. All subscribers · QLD + NSW">
+      </div>
+      <div class="field">
+        <label>Subject</label>
+        <input type="text" id="f-email1-subject" placeholder="e.g. {{ first_name|title }}, don't leave Mothers Day too late!">
+        <div class="field-help">Klaviyo merge tags supported.</div>
+      </div>
+      <div class="field">
+        <label>Preview text</label>
+        <input type="text" id="f-email1-preview" placeholder="The text that shows after the subject in inboxes">
+      </div>
+      <div class="field">
+        <label>Email HTML <span class="required">*</span></label>
+        <textarea id="f-email1-html" class="code-area" placeholder="Paste the Klaviyo body content (style block + body), no outer <html> shell"></textarea>
+        <div class="field-help">This becomes <code>email-1.html</code> in the folder.</div>
+      </div>
+    </section>
+
+    <!-- 03 · EMAIL 2 -->
+    <section class="form-section">
+      <div class="form-section-head">
+        <div class="form-section-num">03</div>
+        <div class="form-section-title">Email 2</div>
+        <div class="form-section-help">Leave blank if only one email this week</div>
+      </div>
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="f-email2-title" placeholder="e.g. Rib Fillet Social Proof">
+      </div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Send date</label>
+          <input type="date" id="f-email2-date">
+        </div>
+        <div class="field">
+          <label>Send time</label>
+          <input type="time" id="f-email2-time">
+        </div>
+      </div>
+      <div class="field">
+        <label>Segments</label>
+        <input type="text" id="f-email2-segments">
+      </div>
+      <div class="field">
+        <label>Subject</label>
+        <input type="text" id="f-email2-subject">
+      </div>
+      <div class="field">
+        <label>Preview text</label>
+        <input type="text" id="f-email2-preview">
+      </div>
+      <div class="field">
+        <label>Email HTML</label>
+        <textarea id="f-email2-html" class="code-area" placeholder="Paste the Klaviyo body content"></textarea>
+      </div>
+    </section>
+
+    <!-- 04 · WEBSITE UPDATES -->
+    <section class="form-section">
+      <div class="form-section-head">
+        <div class="form-section-num">04</div>
+        <div class="form-section-title">Website Updates</div>
+        <div class="form-section-help">Add as many as you need</div>
+      </div>
+      <div class="web-change-list" id="web-changes"></div>
+      <button type="button" class="add-btn" id="add-web-change">+ Add web change</button>
+    </section>
+
+    <!-- 05 · CREATIVES -->
+    <section class="form-section">
+      <div class="form-section-head">
+        <div class="form-section-num">05</div>
+        <div class="form-section-title">Image Ad Creative</div>
+        <div class="form-section-help">Drop images in</div>
+      </div>
+      <div class="image-uploads">
+        <h4>1×1 Square · Feed</h4>
+        <div class="image-drop" data-creative="creative-1a.jpg">
+          <div class="image-drop-placeholder">
+            <div class="icon">+</div>
+            <div class="name">creative-1a.jpg</div>
+            <div class="sub">1080×1080</div>
+          </div>
+          <input type="file" accept="image/jpeg,image/png">
+          <button type="button" class="image-drop-clear" title="Remove">×</button>
+        </div>
+        <div class="image-drop" data-creative="creative-1b.jpg">
+          <div class="image-drop-placeholder">
+            <div class="icon">+</div>
+            <div class="name">creative-1b.jpg</div>
+            <div class="sub">1080×1080</div>
+          </div>
+          <input type="file" accept="image/jpeg,image/png">
+          <button type="button" class="image-drop-clear" title="Remove">×</button>
+        </div>
+        <h4>9×16 Vertical · Stories &amp; Reels</h4>
+        <div class="image-drop vertical" data-creative="creative-2a.jpg">
+          <div class="image-drop-placeholder">
+            <div class="icon">+</div>
+            <div class="name">creative-2a.jpg</div>
+            <div class="sub">1080×1920</div>
+          </div>
+          <input type="file" accept="image/jpeg,image/png">
+          <button type="button" class="image-drop-clear" title="Remove">×</button>
+        </div>
+        <div class="image-drop vertical" data-creative="creative-2b.jpg">
+          <div class="image-drop-placeholder">
+            <div class="icon">+</div>
+            <div class="name">creative-2b.jpg</div>
+            <div class="sub">1080×1920</div>
+          </div>
+          <input type="file" accept="image/jpeg,image/png">
+          <button type="button" class="image-drop-clear" title="Remove">×</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="editor-side">
+    <div class="side-label">Week editor</div>
+    <div class="side-title" id="side-title">No date set</div>
+    <div class="side-folder" id="side-folder">weeks/—/</div>
+
+    <div class="side-actions">
+      <button type="button" class="side-btn primary" id="btn-generate">Generate zip</button>
+      <button type="button" class="side-btn" id="btn-preview">Preview</button>
+      <button type="button" class="side-btn secondary" id="btn-load">Load draft</button>
+      <button type="button" class="side-btn danger" id="btn-clear">Clear draft</button>
+    </div>
+
+    <div class="side-status" id="side-status">
+      Ready. Auto-save will start when you type.
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// ============================================================
+// PASSCODE GATE
+// ============================================================
+const HASH = '1630ddb8d90cd618ae30beceabab365a3e81c2da5b836c281957a4010db0b6f5';
+const SESSION_KEY = 'mm-admin-unlocked';
+
+async function sha256(text) {
+  const buf = new TextEncoder().encode(text);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+function unlock() {
+  document.body.classList.remove('is-locked');
+  document.body.classList.add('is-unlocked');
+  document.getElementById('gate').style.display = 'none';
+  sessionStorage.setItem(SESSION_KEY, '1');
+  initEditor();
+}
+
+async function checkGate() {
+  const input = document.getElementById('gate-input');
+  const error = document.getElementById('gate-error');
+  if (!input.value) { error.textContent = 'Enter a passcode.'; return; }
+  const hash = await sha256(input.value);
+  if (hash === HASH) { error.textContent = ''; unlock(); }
+  else { error.textContent = 'Wrong passcode.'; input.select(); }
+}
+
+if (sessionStorage.getItem(SESSION_KEY) === '1') {
+  unlock();
+}
+document.getElementById('gate-btn').addEventListener('click', checkGate);
+document.getElementById('gate-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkGate();
+});
+
+// ============================================================
+// EDITOR LOGIC
+// ============================================================
+const STORAGE_KEY = 'mm-editor-draft';
+let imageData = {};  // { 'creative-1a.jpg': dataURL, ... }
+let webChanges = []; // [{ title, where, html }]
+
+function initEditor() {
+  setupFieldListeners();
+  setupImageDrops();
+  setupWebChanges();
+  setupSidebarButtons();
+  setupDateAutoFolder();
+  loadDraftIfExists();
+  updateSidebar();
+}
+
+// -- Helper: read all form values into a single state object --
+function getState() {
+  return {
+    weekDate: val('f-week-date'),
+    overview: {
+      focus: val('f-overview-focus'),
+      offer: val('f-overview-offer'),
+      message: val('f-overview-message'),
+      cta: val('f-overview-cta')
+    },
+    email1: {
+      title: val('f-email1-title'),
+      date: val('f-email1-date'),
+      time: val('f-email1-time'),
+      segments: val('f-email1-segments'),
+      subject: val('f-email1-subject'),
+      preview: val('f-email1-preview'),
+      html: val('f-email1-html')
+    },
+    email2: {
+      title: val('f-email2-title'),
+      date: val('f-email2-date'),
+      time: val('f-email2-time'),
+      segments: val('f-email2-segments'),
+      subject: val('f-email2-subject'),
+      preview: val('f-email2-preview'),
+      html: val('f-email2-html')
+    },
+    webChanges: webChanges.map(c => ({ ...c })),
+    images: imageData
+  };
+}
+
+function val(id) { return document.getElementById(id).value.trim(); }
+function setVal(id, v) { document.getElementById(id).value = v || ''; }
+
+// -- Auto-save to localStorage on any input --
+function saveDraft() {
+  try {
+    const state = getState();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    setStatus('Saved · ' + new Date().toLocaleTimeString(), 'ok');
+  } catch (e) {
+    setStatus('Save failed (storage full?)', 'err');
+  }
+}
+
+function loadDraftIfExists() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+  try {
+    const s = JSON.parse(raw);
+    setVal('f-week-date', s.weekDate);
+    setVal('f-overview-focus', s.overview?.focus);
+    setVal('f-overview-offer', s.overview?.offer);
+    setVal('f-overview-message', s.overview?.message);
+    setVal('f-overview-cta', s.overview?.cta);
+    ['email1', 'email2'].forEach(k => {
+      if (!s[k]) return;
+      setVal(`f-${k}-title`, s[k].title);
+      setVal(`f-${k}-date`, s[k].date);
+      setVal(`f-${k}-time`, s[k].time);
+      setVal(`f-${k}-segments`, s[k].segments);
+      setVal(`f-${k}-subject`, s[k].subject);
+      setVal(`f-${k}-preview`, s[k].preview);
+      setVal(`f-${k}-html`, s[k].html);
+    });
+    webChanges = s.webChanges || [];
+    renderWebChanges();
+    imageData = s.images || {};
+    Object.keys(imageData).forEach(name => {
+      const drop = document.querySelector(`.image-drop[data-creative="${name}"]`);
+      if (drop) showImageInDrop(drop, imageData[name]);
+    });
+    updateFolderName();
+    updateSidebar();
+    setStatus('Draft loaded', 'ok');
+  } catch (e) {
+    console.error('Failed to load draft', e);
+  }
+}
+
+function setupFieldListeners() {
+  document.querySelectorAll('input, textarea').forEach(el => {
+    if (el.type === 'file') return;
+    el.addEventListener('input', () => {
+      saveDraft();
+      updateSidebar();
+    });
+  });
+}
+
+function setupDateAutoFolder() {
+  document.getElementById('f-week-date').addEventListener('change', updateFolderName);
+}
+
+function updateFolderName() {
+  const date = val('f-week-date');
+  setVal('f-folder', date || '');
+  updateSidebar();
+}
+
+function updateSidebar() {
+  const date = val('f-week-date');
+  const title = document.getElementById('side-title');
+  const folder = document.getElementById('side-folder');
+  if (date) {
+    const d = new Date(date + 'T00:00:00');
+    title.textContent = d.toLocaleDateString('en-AU', {
+      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+    });
+    folder.textContent = `weeks/${date}/`;
+  } else {
+    title.textContent = 'No date set';
+    folder.textContent = 'weeks/—/';
+  }
+}
+
+function setStatus(msg, kind) {
+  const el = document.getElementById('side-status');
+  if (kind === 'ok') {
+    el.innerHTML = '<span class="ok">●</span> ' + msg;
+  } else if (kind === 'err') {
+    el.innerHTML = '<span style="color: #c14d47">●</span> ' + msg;
+  } else {
+    el.textContent = msg;
+  }
+}
+
+// ============================================================
+// IMAGE DROPS
+// ============================================================
+function setupImageDrops() {
+  document.querySelectorAll('.image-drop').forEach(drop => {
+    const fileInput = drop.querySelector('input[type="file"]');
+    const clearBtn = drop.querySelector('.image-drop-clear');
+    const name = drop.dataset.creative;
+
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        imageData[name] = reader.result;
+        showImageInDrop(drop, reader.result);
+        saveDraft();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    clearBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      delete imageData[name];
+      drop.classList.remove('has-image');
+      const existing = drop.querySelector('img');
+      if (existing) existing.remove();
+      drop.querySelector('.image-drop-placeholder').style.display = '';
+      fileInput.value = '';
+      saveDraft();
+    });
+  });
+}
+
+function showImageInDrop(drop, dataURL) {
+  drop.classList.add('has-image');
+  drop.querySelector('.image-drop-placeholder').style.display = 'none';
+  let img = drop.querySelector('img');
+  if (!img) {
+    img = document.createElement('img');
+    drop.insertBefore(img, drop.querySelector('input[type="file"]'));
+  }
+  img.src = dataURL;
+}
+
+// ============================================================
+// WEB CHANGES (dynamic add/remove)
+// ============================================================
+function setupWebChanges() {
+  document.getElementById('add-web-change').addEventListener('click', () => {
+    webChanges.push({ title: '', where: '', html: '' });
+    renderWebChanges();
+    saveDraft();
+  });
+  if (webChanges.length === 0) {
+    webChanges.push({ title: '', where: '', html: '' });
+  }
+  renderWebChanges();
+}
+
+function renderWebChanges() {
+  const list = document.getElementById('web-changes');
+  list.innerHTML = '';
+  webChanges.forEach((change, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const card = document.createElement('div');
+    card.className = 'web-change-card';
+    card.innerHTML = `
+      <div class="web-change-card-head">
+        <div class="web-change-card-num">Change ${num}</div>
+        ${webChanges.length > 1 ? `<button type="button" class="remove-btn" data-idx="${i}">Remove</button>` : ''}
+      </div>
+      <div class="field">
+        <label>Title</label>
+        <input type="text" data-field="title" data-idx="${i}" value="${escapeAttr(change.title)}" placeholder="e.g. Homepage Hero — $39.99/KG Rib Fillet">
+      </div>
+      <div class="field">
+        <label>Where it lives</label>
+        <input type="text" data-field="where" data-idx="${i}" value="${escapeAttr(change.where)}" placeholder="e.g. Homepage · Slot 1">
+      </div>
+      <div class="field">
+        <label>HTML</label>
+        <textarea data-field="html" data-idx="${i}" class="code-area" placeholder="Paste the Squarespace HTML/Liquid block">${escapeText(change.html)}</textarea>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+
+  list.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', e => {
+      const i = parseInt(e.target.dataset.idx);
+      const field = e.target.dataset.field;
+      webChanges[i][field] = e.target.value;
+      saveDraft();
+    });
+  });
+  list.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const i = parseInt(e.target.dataset.idx);
+      webChanges.splice(i, 1);
+      renderWebChanges();
+      saveDraft();
+    });
+  });
+}
+
+function escapeAttr(s) { return (s || '').replace(/"/g, '&quot;'); }
+function escapeText(s) { return (s || '').replace(/</g, '&lt;'); }
+
+// ============================================================
+// SIDEBAR BUTTONS
+// ============================================================
+function setupSidebarButtons() {
+  document.getElementById('btn-load').addEventListener('click', () => {
+    if (confirm('Load saved draft? This will overwrite any unsaved changes.')) {
+      loadDraftIfExists();
+    }
+  });
+  document.getElementById('btn-clear').addEventListener('click', () => {
+    if (confirm('Clear the saved draft and reset the form?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+  });
+  document.getElementById('btn-preview').addEventListener('click', openPreview);
+  document.getElementById('btn-generate').addEventListener('click', generateZip);
+}
+
+// ============================================================
+// PAGE GENERATION
+// ============================================================
+function tbc(value) {
+  if (!value || !value.trim()) return '<span class="tbc">To confirm</span>';
+  return value;
+}
+
+function formatLong(date) {
+  if (!date) return 'To confirm';
+  const d = new Date(date + 'T00:00:00');
+  return d.toLocaleDateString('en-AU', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+
+function formatSendDate(date, time) {
+  if (!date && !time) return '<span class="tbc">To confirm</span>';
+  const d = date ? new Date(date + 'T00:00:00') : null;
+  const dayLabel = d ? d.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }) : '';
+  const timeLabel = time ? formatTime(time) : '';
+  return [dayLabel, timeLabel].filter(Boolean).join(' · ');
+}
+
+function formatTime(t) {
+  // "12:00" -> "12pm", "07:30" -> "7:30am"
+  const [h, m] = t.split(':').map(Number);
+  const period = h >= 12 ? 'pm' : 'am';
+  const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  return m === 0 ? `${hour12}${period}` : `${hour12}:${String(m).padStart(2, '0')}${period}`;
+}
+
+function weekTagFromDate(dateStr) {
+  if (!dateStr) return 'Week of [DATE]';
+  const d = new Date(dateStr + 'T00:00:00');
+  return 'Week of ' + d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function urlEncode(s) {
+  return encodeURIComponent(s);
+}
+
+// Build the full week HTML page
+function buildWeekHTML(state) {
+  const date = state.weekDate;
+  const longDate = formatLong(date);
+  const weekTag = weekTagFromDate(date);
+  const subjUrl = encodeURIComponent(weekTag);
+
+  const overviewRow = (label, val) =>
+    `<div class="overview-row"><div class="lbl">${label}</div><div class="val">${tbc(val)}</div></div>`;
+
+  const emailMeta = (email) => `
+          <div class="email-meta">
+            <div class="label">Send Time</div>
+            <div class="value">${tbc(formatSendDate(email.date, email.time))}</div>
+            <div class="label">Segments</div>
+            <div class="value">${tbc(email.segments)}</div>
+            <div class="label">Subject</div>
+            <div class="value">${tbc(email.subject)}</div>
+            <div class="label">Preview</div>
+            <div class="value">${tbc(email.preview)}</div>
+          </div>`;
+
+  const emailBlock = (n, email) => `
+      <div class="section">
+        <div class="section-num">0${n + 1}</div>
+        <div class="section-title">Email ${n}</div>
+        <div class="email-card">
+          <div class="email-header">
+            <div>
+              <div class="e-num">Send 0${n} of 02</div>
+              <div class="e-title">${tbc(email.title)}</div>
+            </div>
+            <div class="e-date">${tbc(formatSendDate(email.date, email.time))}</div>
+          </div>
+          <div class="email-preview-wrap">
+            <div class="preview-bar">
+              <div class="pb-info">
+                <div class="pb-name">email-${n}.html</div>
+                <div class="pb-meta">Live preview · click "Open in tab" for full-screen</div>
+              </div>
+              <div class="pb-actions">
+                <a class="pb-btn" href="email-${n}.html" target="_blank" rel="noopener">Open in tab</a>
+              </div>
+            </div>
+            <iframe class="email-iframe" src="email-${n}.html" sandbox="allow-same-origin allow-popups" title="Email ${n} preview" loading="lazy"></iframe>
+          </div>
+${emailMeta(email)}
+          <div class="feedback-row" data-section="Email ${n}">
+            <div class="fb-row-label">Email ${n} · Approval</div>
+            <div class="fb-actions">
+              <button type="button" class="fb-btn approve">✓ Approve</button>
+              <button type="button" class="fb-btn note">✎ Add note</button>
+            </div>
+            <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+            <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+            <div class="fb-note-form">
+              <textarea placeholder="What needs changing? Be as specific as you like."></textarea>
+              <div class="fb-form-actions">
+                <button type="button" class="fb-cancel">Cancel</button>
+                <button type="button" class="fb-send">Send to Mel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+  const webChangeBlock = (i, change) => {
+    const num = String(i + 1).padStart(2, '0');
+    const sectionName = `Change ${num}`;
+    return `
+        <div class="web-change">
+          <div class="web-change-header">
+            <div>
+              <div class="wc-num">Change ${num}</div>
+              <div class="wc-title">${tbc(change.title)}</div>
+            </div>
+            <div class="wc-where">${tbc(change.where)}</div>
+          </div>
+          <div class="web-preview-wrap">
+            <div class="preview-bar">
+              <div class="pb-info">
+                <div class="pb-name">web-${i + 1}.html</div>
+                <div class="pb-meta">Live preview · banner code as it'll render on site</div>
+              </div>
+              <div class="pb-actions">
+                <a class="pb-btn" href="web-${i + 1}.html" target="_blank" rel="noopener">Open in tab</a>
+              </div>
+            </div>
+            <iframe class="web-iframe" src="web-${i + 1}.html" sandbox="allow-same-origin allow-popups" title="${sectionName} preview" loading="lazy"></iframe>
+          </div>
+          <div class="feedback-row" data-section="${sectionName}">
+            <div class="fb-row-label">${sectionName} · Approval</div>
+            <div class="fb-actions">
+              <button type="button" class="fb-btn approve">✓ Approve</button>
+              <button type="button" class="fb-btn note">✎ Add note</button>
+            </div>
+            <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+            <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+            <div class="fb-note-form">
+              <textarea placeholder="What needs changing? Be as specific as you like."></textarea>
+              <div class="fb-form-actions">
+                <button type="button" class="fb-cancel">Cancel</button>
+                <button type="button" class="fb-send">Send to Mel</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+  };
+
+  const creativeCard = (id, label, ratio, ratioClass) => `
+          <div class="creative-card">
+            <div class="c-header">
+              <div class="c-title">${label}</div>
+              <div class="c-ratio">${ratio}</div>
+            </div>
+            <div class="image-slot ${ratioClass}">
+              <img src="${id}.jpg" alt="${label}" onerror="this.style.display='none'">
+              <div class="ph-content">
+                <div class="ph-icon">+</div>
+                <div class="ph-text">${id}.jpg</div>
+                <div class="ph-sub">Add to this folder</div>
+              </div>
+            </div>
+            <div class="feedback-row" data-section="${label}">
+              <div class="fb-row-label">${label}</div>
+              <div class="fb-actions">
+                <button type="button" class="fb-btn approve">✓ Approve</button>
+                <button type="button" class="fb-btn note">✎ Add note</button>
+              </div>
+              <div class="fb-confirm success"><span class="fb-success-text"></span></div>
+              <div class="fb-confirm error"><span class="fb-error-text"></span><button type="button" class="fb-retry">Retry</button></div>
+              <div class="fb-note-form">
+                <textarea placeholder="What needs changing?"></textarea>
+                <div class="fb-form-actions">
+                  <button type="button" class="fb-cancel">Cancel</button>
+                  <button type="button" class="fb-send">Send to Mel</button>
+                </div>
+              </div>
+            </div>
+          </div>`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${weekTag} | Meat Merchant Casuarina</title>
+<meta name="week-tag" content="${weekTag}">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  .tbc {
+    display: inline-block; padding: 2px 10px;
+    background: #fff4f3; color: #af3630;
+    border: 1px dashed #af3630; border-radius: 4px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<input type="checkbox" id="mobile-toggle" class="mobile-toggle" aria-hidden="true">
+
+<header class="mobile-topbar" aria-label="Mobile header">
+  <img src="../../assets/img/meat-merchant-logo.png" alt="Meat Merchant Casuarina" class="logo-img logo-topbar">
+  <label for="mobile-toggle" class="mt-burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </label>
+</header>
+
+<label for="mobile-toggle" class="mobile-backdrop" aria-label="Close menu"></label>
+
+<div class="site">
+
+  <aside class="sidebar">
+    <a href="../../" style="text-decoration: none; color: inherit; display: block;">
+      <img src="../../assets/img/meat-merchant-logo.png" alt="Meat Merchant Casuarina" class="logo-img logo-sidebar">
+      <div class="brand-sub">The Service Edit · Weekly Marketing Plans</div>
+    </a>
+
+    <div class="nav-label">Plans · Most recent first</div>
+    <ul class="week-list">
+      <li>
+        <a href="../${date}/" class="current">
+          <span class="week-tag">Current</span>
+          ${date ? new Date(date + 'T00:00:00').toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '—'}
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <strong>The Service Edit</strong><br>
+      Email · Web · Creative
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <div class="report-header">
+        <div class="header-label">Weekly Marketing Plan</div>
+        <img src="../../assets/img/meat-merchant-logo.png" alt="Meat Merchant Casuarina" class="logo-img logo-hero">
+        <div class="header-sub">Email · Website · Creative — for review and approval.</div>
+
+        <div class="header-meta">
+          <div class="meta-item">
+            <div class="lbl">WEEK COMMENCING</div>
+            <div class="val">${longDate}</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">PREPARED FOR</div>
+            <div class="val">Matt &amp; Harry</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">PREPARED BY</div>
+            <div class="val">Mel · The Service Edit</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="approval-bar">
+        <div class="bar-msg">For review by Matt &amp; Harry · Approval requested before send</div>
+        <div class="bar-actions">
+          <span class="bar-confirm"></span>
+          <button type="button" class="bar-btn">Approve full week</button>
+          <button type="button" class="bar-btn secondary">Request changes</button>
+        </div>
+      </div>
+
+      <div class="from-bar">
+        <span class="fb-label">Feedback from:</span>
+        <select id="from-picker">
+          <option value="Matt">Matt</option>
+          <option value="Harry">Harry</option>
+          <option value="Both">Both</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <div class="section-num">01</div>
+        <div class="section-title">Weekly Overview</div>
+        <div class="section-tag">The week at a glance — what we're saying, who we're saying it to, and what we want them to do.</div>
+        <div class="overview-grid">
+          ${overviewRow('Week Commencing', longDate)}
+          ${overviewRow('Main Campaign Focus', state.overview.focus)}
+          ${overviewRow('Key Offer / Special', state.overview.offer)}
+          ${overviewRow('Main Customer Message', state.overview.message)}
+          ${overviewRow('Primary CTA', state.overview.cta)}
+        </div>
+      </div>
+
+${emailBlock(1, state.email1)}
+${emailBlock(2, state.email2)}
+
+      <div class="section">
+        <div class="section-num">04</div>
+        <div class="section-title">Website Updates</div>
+${state.webChanges.map((c, i) => webChangeBlock(i, c)).join('\n')}
+      </div>
+
+      <div class="section">
+        <div class="section-num">05</div>
+        <div class="section-title">Image Ad Creative</div>
+
+        <h3 class="sub">1×1 Square · Feed Placements</h3>
+        <div class="creative-grid">
+${creativeCard('creative-1a', 'Creative 1A', '1:1 · 1080×1080', 'square')}
+${creativeCard('creative-1b', 'Creative 1B', '1:1 · 1080×1080', 'square')}
+        </div>
+
+        <h3 class="sub">9×16 Vertical · Stories &amp; Reels</h3>
+        <div class="creative-grid">
+${creativeCard('creative-2a', 'Creative 2A', '9:16 · 1080×1920', 'vertical')}
+${creativeCard('creative-2b', 'Creative 2B', '9:16 · 1080×1920', 'vertical')}
+        </div>
+      </div>
+
+      <div class="footer">
+        <strong>The Service Edit</strong> · Weekly marketing plan for Meat Merchant Casuarina
+      </div>
+
+    </div>
+  </main>
+
+</div>
+<script src="../../assets/feedback.js"></script>
+</body>
+</html>`;
+}
+
+// Build a wrapper for the email/web HTML so they're standalone
+function wrapEmailHTML(bodyContent) {
+  if (!bodyContent || !bodyContent.trim()) return '<!DOCTYPE html><html><body><p style="padding:40px;font-family:sans-serif;color:#888">No email content yet.</p></body></html>';
+  if (bodyContent.trim().toLowerCase().startsWith('<!doctype') || bodyContent.includes('<html')) return bodyContent;
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email preview</title>
+</head>
+<body style="margin:0;padding:0;">
+${bodyContent}
+</body>
+</html>`;
+}
+
+// ============================================================
+// PREVIEW
+// ============================================================
+function openPreview() {
+  const state = getState();
+  const html = buildWeekHTML(state);
+  // For preview, we need to make iframe srcs work. Simplest: open with a blob URL
+  const w = window.open('', '_blank');
+  if (!w) {
+    alert('Pop-up blocked. Allow pop-ups and try again.');
+    return;
+  }
+  // Inline the email/web HTML and creative images using data URLs to make the preview self-contained
+  const email1Html = wrapEmailHTML(state.email1.html);
+  const email2Html = wrapEmailHTML(state.email2.html);
+
+  // Build a self-contained preview by inlining the iframe sources as Blob URLs
+  const previewHTML = html
+    .replace('src="email-1.html"', `src="${blobURL(email1Html, 'text/html')}"`)
+    .replace('src="email-2.html"', `src="${blobURL(email2Html, 'text/html')}"`)
+    .replace(/src="web-(\d+)\.html"/g, (_, n) => {
+      const idx = parseInt(n) - 1;
+      const wc = state.webChanges[idx];
+      return `src="${blobURL(wrapEmailHTML(wc?.html || ''), 'text/html')}"`;
+    });
+
+  // Replace creative image sources with the data URLs (or leave as-is if not uploaded)
+  let final = previewHTML;
+  Object.keys(state.images).forEach(name => {
+    final = final.replace(`src="${name}"`, `src="${state.images[name]}"`);
+  });
+
+  // Point CSS link at the live deployed version since we can't bundle it
+  final = final.replace(
+    'href="../../assets/site.css"',
+    'href="https://mellyanncox-ctrl.github.io/meatmerchant-weekly/assets/site.css"'
+  );
+  final = final.replace(
+    /src="\.\.\/\.\.\/assets\/img\/meat-merchant-logo\.png"/g,
+    'src="https://mellyanncox-ctrl.github.io/meatmerchant-weekly/assets/img/meat-merchant-logo.png"'
+  );
+  // Remove the feedback.js link (no need in preview)
+  final = final.replace(/<script src="\.\.\/\.\.\/assets\/feedback\.js"><\/script>/, '');
+
+  w.document.open();
+  w.document.write(final);
+  w.document.close();
+}
+
+function blobURL(content, type) {
+  const blob = new Blob([content], { type });
+  return URL.createObjectURL(blob);
+}
+
+// ============================================================
+// GENERATE ZIP
+// ============================================================
+async function generateZip() {
+  const state = getState();
+  if (!state.weekDate) {
+    alert('Pick a week date first.');
+    return;
+  }
+
+  const btn = document.getElementById('btn-generate');
+  btn.disabled = true;
+  btn.textContent = 'Generating...';
+
+  try {
+    const zip = new JSZip();
+
+    // 1. The main page
+    zip.file('index.html', buildWeekHTML(state));
+
+    // 2. Email files
+    if (state.email1.html.trim()) {
+      zip.file('email-1.html', wrapEmailHTML(state.email1.html));
+    }
+    if (state.email2.html.trim()) {
+      zip.file('email-2.html', wrapEmailHTML(state.email2.html));
+    }
+
+    // 3. Web change files
+    state.webChanges.forEach((c, i) => {
+      if (c.html && c.html.trim()) {
+        zip.file(`web-${i + 1}.html`, wrapEmailHTML(c.html));
+      }
+    });
+
+    // 4. Creative images (decode data URLs back to binary)
+    for (const name of Object.keys(state.images)) {
+      const dataURL = state.images[name];
+      const base64 = dataURL.split(',')[1];
+      zip.file(name, base64, { base64: true });
+    }
+
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `week-${state.weekDate}.zip`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    btn.disabled = false;
+    btn.textContent = 'Generate zip';
+    setStatus('Zip downloaded ✓', 'ok');
+  } catch (e) {
+    console.error(e);
+    btn.disabled = false;
+    btn.textContent = 'Generate zip';
+    alert('Failed to generate zip: ' + e.message);
+  }
+}
+</script>
+
+</body>
+</html>
