@@ -1487,3 +1487,37 @@ body[data-page="home"] .sidebar-footer strong {
   .logo-sidebar { width: 120px; }
   .logo-hero { width: 160px; }
 }
+
+
+/* ============================================================
+   ADMIN LINK · discreet sidebar-only link to the admin
+   ============================================================ */
+.sidebar-admin-link {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.sidebar-admin-link a {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.15s;
+}
+.sidebar-admin-link a:hover {
+  color: #af3630;
+}
+/* On the homepage's light sidebar, use a different colour */
+body[data-page="home"] .sidebar-admin-link {
+  border-top-color: #ececec;
+}
+body[data-page="home"] .sidebar-admin-link a {
+  color: #c0c0c0;
+}
+body[data-page="home"] .sidebar-admin-link a:hover {
+  color: #af3630;
+}
