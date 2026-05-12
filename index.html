@@ -329,7 +329,7 @@
           Mon 15 Jun 2026
         </a>
       </li>
-      <li class="hidden-week">
+      <li>
         <a href="weeks/2026-06-08/" class="upcoming">
           <span class="week-tag">Upcoming · Week 6</span>
           Mon 8 Jun 2026
@@ -354,20 +354,21 @@
         </a>
       </li>
       <li>
-        <a href="weeks/2026-05-11/" class="upcoming">
-          <span class="week-tag">Upcoming · Week 2</span>
+        <a href="weeks/2026-05-11/" class="current">
+          <span class="week-tag">Current · Week 2</span>
           Mon 11 May 2026
         </a>
       </li>
       <li>
-        <a href="weeks/2026-05-04/" class="current">
-          <span class="week-tag">Current · Week 1</span>
+        <a href="weeks/2026-05-04/" class="past">
+          <span class="week-tag">Past · Week 1</span>
           Mon 4 May 2026
         </a>
       </li>
       <li class="show-all-row">
-        <button class="show-all-btn" onclick="document.querySelectorAll('.hidden-week').forEach(el=>el.classList.toggle('reveal'));this.classList.toggle('expanded');this.textContent=this.classList.contains('expanded')?'Show less':'+ 9 more weeks'">+ 9 more weeks</button>
+        <button class="show-all-btn" onclick="document.querySelectorAll('.hidden-week').forEach(el=>el.classList.toggle('reveal'));this.classList.toggle('expanded');this.textContent=this.classList.contains('expanded')?'Show less':'+ 8 more weeks'">+ 8 more weeks</button>
       </li>
+    
     </ul>
 
     
@@ -390,31 +391,31 @@
         <p class="lede">Each week's email, website, and creative work in one place. For review and approval by Matt &amp; Harry.</p>
       </div>
 
-      <a href="weeks/2026-05-04/" style="text-decoration: none; color: inherit; display: block;">
+      <a href="weeks/2026-05-11/" style="text-decoration: none; color: inherit; display: block;">
         <div class="this-week-card">
-          <div class="tw-eyebrow">This week · Week 1</div>
-          <div class="tw-title">Mon 4 May 2026</div>
-          <p class="tw-sub">Mother's Day weekend &amp; Rib Fillet Special</p>
+          <div class="tw-eyebrow">This week · Week 2</div>
+          <div class="tw-title">Mon 11 May 2026</div>
+          <p class="tw-sub">Kozzy's Kitchen — oven-ready meals launch</p>
           <span class="tw-cta">View this week's plan →</span>
         </div>
       </a>
 
       <div class="section-block">
         <h2>Past weeks</h2>
-        <p class="section-sub">Nothing yet — this is the first week.</p>
-        <div class="past-empty">No past weeks yet — this is the first week of the system.</div>
+        <p class="section-sub">Plans that have already shipped.</p>
+        <div class="past-grid">
+        <a href="weeks/2026-05-04/" class="archive-card past-card">
+          <span class="card-tag">Week 1</span>
+          <div class="card-date">Mon 4 May 2026</div>
+          <div class="card-meta">View plan →</div>
+        </a>
+        </div>
       </div>
 
       <div class="section-block">
         <h2>Upcoming</h2>
         <p class="section-sub">Scaffolded weeks waiting for content.</p>
         <div class="upcoming-list">
-        <a href="weeks/2026-05-11/" class="upcoming-row">
-          <span class="up-week">Week 2</span>
-          <span class="up-date">Mon 11 May 2026</span>
-          <span class="up-status">In planning</span>
-          <span class="up-arrow">→</span>
-        </a>
         <a href="weeks/2026-05-18/" class="upcoming-row">
           <span class="up-week">Week 3</span>
           <span class="up-date">Mon 18 May 2026</span>

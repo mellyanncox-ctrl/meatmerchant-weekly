@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kozzy's Kitchen – Oven Ready Meals</title>
+<style>
+@media only screen and (max-width:599px){
+  .outer-td { padding: 10px 6px !important; }
+  .main-table { width: 100% !important; }
+  .hero-pad { padding: 28px 20px 0 20px !important; }
+  .h1 { font-size: 36px !important; }
+  .intro-pad { padding: 24px 20px 20px 20px !important; }
+  .grid-pad { padding: 16px 12px 28px 12px !important; }
+  .product-td { width: 50% !important; padding: 6px !important; }
+  .cta-pad { padding: 28px 20px !important; }
+  .cta-h2 { font-size: 28px !important; }
+  .footer-pad { padding: 20px 20px !important; }
+  .quote-pad { padding: 22px 20px !important; }
+}
+  @media only screen and (max-width:599px){
+    .strip-cell { width: 50% !important; }
+    .strip-cell-3, .strip-cell-4 { border-bottom: none !important; }
+    .strip-cell-1, .strip-cell-3 { border-right: 1px solid #e8dfc8 !important; }
+    .strip-cell-2, .strip-cell-4 { border-right: none !important; }
+    .delivery-col { width: 50% !important; }
+    .visit-left { display: none !important; }
+    .visit-right { width: 100% !important; padding: 32px 20px !important; }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#fdf7e3;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fdf7e3" style="background-color:#fdf7e3;">
+<tr><td class="outer-td" align="center" style="padding:20px 10px;">
+<table class="main-table" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+  <!-- LOGO BAR -->
+  <tr>
+    <td bgcolor="#111111" style="background-color:#111111;padding:20px 32px;">
+      <img src="https://d3k81ch9hvuctc.cloudfront.net/company/Rtz3zv/images/c504ab4f-beb7-403a-8e5f-8d0544ced0db.png" alt="Meat Merchant" width="110" style="display:block;">
+    </td>
+  </tr>
+
+  <!-- HERO -->
+  <tr>
+    <td class="hero-pad" bgcolor="#fdf7e3" style="background-color:#fdf7e3;padding:36px 32px 0 32px;">
+      <p style="margin:0 0 12px 0;font-size:12px;font-weight:700;letter-spacing:3px;color:#af3630;text-transform:uppercase;">Oven ready. Actually delicious.</p>
+      <h1 class="h1" style="margin:0 0 28px 0;font-size:46px;font-weight:900;color:#111111;text-transform:uppercase;line-height:1.0;font-family:Impact,Arial Black,sans-serif;">Kozzy Cooks.<br>Matt Cuts.<br><span style="color:#af3630;">You Just Heat.</span></h1>
+      <table cellpadding="0" cellspacing="0" border="0" style="margin:0 0 4px 0;">
+        <tr>
+          <td bgcolor="#af3630" style="background-color:#af3630;">
+            <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:inline-block;padding:14px 36px;font-size:13px;font-weight:700;letter-spacing:2px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Shop Kozzy&rsquo;s Kitchen &rarr;</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- HERO IMAGE -->
+  <tr>
+    <td bgcolor="#fdf7e3" style="background-color:#fdf7e3;padding:0 32px;font-size:0;line-height:0;">
+      <img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/P1002644.jpg?v=1778549181" alt="Kozzy's Kitchen oven ready meals" width="536" style="display:block;width:100%;max-width:536px;border:0;">
+    </td>
+  </tr>
+
+  <!-- AMBER DIVIDER -->
+  <tr>
+    <td bgcolor="#af3630" style="background-color:#af3630;height:4px;font-size:0;line-height:0;">&nbsp;</td>
+  </tr>
+
+  <!-- INTRO -->
+  <tr>
+    <td class="intro-pad" bgcolor="#fff8ea" style="background-color:#fff8ea;padding:32px 32px 28px 32px;border-bottom:1px solid #e8dfc4;">
+      <p style="margin:0 0 16px 0;font-size:15px;line-height:1.85;color:#333333;">Hey {{ person.first_name | title | default: 'there' }},</p>
+      <p style="margin:0 0 16px 0;font-size:15px;line-height:1.85;color:#333333;">Most &ldquo;ready meals&rdquo; taste like ready meals.</p>
+      <p style="margin:0 0 16px 0;font-size:15px;line-height:1.85;color:#333333;">These don&rsquo;t.</p>
+      <p style="margin:0 0 16px 0;font-size:15px;line-height:1.85;color:#333333;">Kozzy&rsquo;s been cooking these for our family for years. Proper slow-cooked dinners made with real ingredients and cuts straight from our shop.</p>
+      <p style="margin:0 0 16px 0;font-size:15px;line-height:1.85;color:#333333;">Now we make extra so you can keep them in the fridge for the nights you don&rsquo;t feel like cooking.</p>
+    </td>
+  </tr>
+
+  <!-- PRODUCT GRID -->
+  <tr>
+    <td class="grid-pad" bgcolor="#fdf7e3" style="background-color:#fdf7e3;padding:24px 20px 32px 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+        <!-- ROW 1 -->
+        <tr>
+          <td class="product-td" width="50%" style="padding:8px;vertical-align:top;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8dfc4;">
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;font-size:0;line-height:0;">
+                  <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;border:0;"><img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/ENCHILADAcopy.png?v=1768992052" alt="Beef Enchiladas" width="100%" style="display:block;width:100%;border:0;"></a>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 16px 6px 16px;">
+                  <p style="margin:0 0 4px 0;font-size:13px;font-weight:700;color:#111111;font-family:Impact,Arial Black,sans-serif;text-transform:uppercase;letter-spacing:0.5px;">Beef Enchiladas</p>
+                  <p style="margin:0;font-size:13px;font-weight:700;color:#af3630;">$8.29</p>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:10px 16px 16px 16px;">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td bgcolor="#af3630" style="background-color:#af3630;text-align:center;">
+                        <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;padding:10px 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Add to Box &rarr;</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+
+          <td class="product-td" width="50%" style="padding:8px;vertical-align:top;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8dfc4;">
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;font-size:0;line-height:0;">
+                  <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;border:0;"><img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/CHICKENSWIRL-1X1.png?v=1768985116" alt="Chicken Swirl" width="100%" style="display:block;width:100%;border:0;"></a>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 16px 6px 16px;">
+                  <p style="margin:0 0 4px 0;font-size:13px;font-weight:700;color:#111111;font-family:Impact,Arial Black,sans-serif;text-transform:uppercase;letter-spacing:0.5px;">Chicken Swirl</p>
+                  <p style="margin:0;font-size:13px;font-weight:700;color:#af3630;">$8.29</p>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:10px 16px 16px 16px;">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td bgcolor="#af3630" style="background-color:#af3630;text-align:center;">
+                        <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;padding:10px 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Add to Box &rarr;</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ROW 2 -->
+        <tr>
+          <td class="product-td" width="50%" style="padding:8px;vertical-align:top;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8dfc4;">
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;font-size:0;line-height:0;">
+                  <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;border:0;"><img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/MINICHICKENROAST-1X1.png?v=1768985308" alt="Mini Chicken Roast" width="100%" style="display:block;width:100%;border:0;"></a>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 16px 6px 16px;">
+                  <p style="margin:0 0 4px 0;font-size:13px;font-weight:700;color:#111111;font-family:Impact,Arial Black,sans-serif;text-transform:uppercase;letter-spacing:0.5px;">Mini Chicken Roast</p>
+                  <p style="margin:0;font-size:13px;font-weight:700;color:#af3630;">$8.49</p>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:10px 16px 16px 16px;">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td bgcolor="#af3630" style="background-color:#af3630;text-align:center;">
+                        <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;padding:10px 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Add to Box &rarr;</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+
+          <td class="product-td" width="50%" style="padding:8px;vertical-align:top;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8dfc4;">
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;font-size:0;line-height:0;">
+                  <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;border:0;"><img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/LAMBANDREDWINEPARCEL-1X1.png?v=1768985034" alt="Lamb and Red Wine Parcel" width="100%" style="display:block;width:100%;border:0;"></a>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 16px 6px 16px;">
+                  <p style="margin:0 0 4px 0;font-size:13px;font-weight:700;color:#111111;font-family:Impact,Arial Black,sans-serif;text-transform:uppercase;letter-spacing:0.5px;">Lamb &amp; Red Wine Parcel</p>
+                  <p style="margin:0;font-size:13px;font-weight:700;color:#af3630;">$8.49</p>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:10px 16px 16px 16px;">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td bgcolor="#af3630" style="background-color:#af3630;text-align:center;">
+                        <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;padding:10px 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Add to Box &rarr;</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ROW 3 -->
+        <tr>
+          <td class="product-td" width="50%" style="padding:8px;vertical-align:top;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8dfc4;">
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;font-size:0;line-height:0;">
+                  <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;border:0;"><img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/HOMEMADE_GRASS_BED_BEEF_LASAGNA.png?v=1778550416" alt="Grass Fed Beef Lasagne" width="100%" style="display:block;width:100%;border:0;"></a>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 16px 6px 16px;">
+                  <p style="margin:0 0 4px 0;font-size:13px;font-weight:700;color:#111111;font-family:Impact,Arial Black,sans-serif;text-transform:uppercase;letter-spacing:0.5px;">Grass Fed Beef Lasagne</p>
+                  <p style="margin:0;font-size:13px;font-weight:700;color:#af3630;">$19.99</p>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:10px 16px 16px 16px;">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td bgcolor="#af3630" style="background-color:#af3630;text-align:center;">
+                        <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;padding:10px 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Add to Box &rarr;</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+
+          <td class="product-td" width="50%" style="padding:8px;vertical-align:top;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8dfc4;">
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;font-size:0;line-height:0;">
+                  <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;border:0;"><img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/SMALLPOTATOBAKE-WEBSITE-1X1.png?v=1768985248" alt="Potato Bake" width="100%" style="display:block;width:100%;border:0;"></a>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 16px 6px 16px;">
+                  <p style="margin:0 0 4px 0;font-size:13px;font-weight:700;color:#111111;font-family:Impact,Arial Black,sans-serif;text-transform:uppercase;letter-spacing:0.5px;">Potato Bake</p>
+                  <p style="margin:0;font-size:13px;font-weight:700;color:#af3630;">$14.69</p>
+                </td>
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;padding:10px 16px 16px 16px;">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td bgcolor="#af3630" style="background-color:#af3630;text-align:center;">
+                        <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:block;padding:10px 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Add to Box &rarr;</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+
+  <!-- KOZZY QUOTE BLOCK -->
+  <tr>
+    <td class="quote-pad" bgcolor="#af3630" style="background-color:#af3630;padding:28px 32px;">
+      <p style="margin:0 0 10px 0;font-size:11px;font-weight:700;letter-spacing:2px;color:#ffffff;text-transform:uppercase;">Kozzy &amp; Matt</p>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:#ffffff;font-style:italic;">&ldquo;Everything in this range uses cuts from our shop. Grass fed, hand prepped, cooked the way we cook at home. We just made more of it.&rdquo;</p>
+    </td>
+  </tr>
+
+  <!-- CTA -->
+  <tr>
+    <td class="cta-pad" bgcolor="#fdf7e3" style="background-color:#fdf7e3;padding:36px 32px;text-align:center;">
+      <h2 class="cta-h2" style="margin:0 0 10px 0;font-size:36px;font-weight:900;color:#111111;text-transform:uppercase;line-height:1.1;font-family:Impact,Arial Black,sans-serif;">Real Meals.<br>Real Ingredients.<br><span style="color:#af3630;">Just Heat &amp; Eat.</span></h2>
+      <p style="margin:0 0 28px 0;font-size:14px;color:#888888;">Free delivery on orders over $130 &nbsp;&middot;&nbsp; Arrives fresh with ice packs</p>
+      <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+        <tr>
+          <td bgcolor="#af3630" style="background-color:#af3630;">
+            <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" style="display:inline-block;padding:18px 44px;font-size:13px;font-weight:700;letter-spacing:2px;color:#ffffff;text-decoration:none;text-transform:uppercase;">Shop Kozzy's Kitchen &rarr;</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+
+  <!-- FEATURE STRIP -->
+  <tr>
+    <td style="padding:0;">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#fdf7e3;border-top:1px solid #e8dfc8;border-bottom:1px solid #e8dfc8;">
+        <tr>
+          <td class="strip-cell strip-cell-1" width="150" valign="top" align="center" style="padding:18px 8px;border-right:1px solid #e8dfc8;border-bottom:1px solid #e8dfc8;">
+            <div style="width:52px;height:52px;border-radius:50%;background:#fef5ec;border:1.5px solid #e8dfc8;margin:0 auto 10px;overflow:hidden;line-height:52px;text-align:center;">
+              <img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/6_ede2af58-82b2-42e1-9683-dde070d7b47b.png?v=1772618189" width="38" height="38" alt="Order by Midnight" style="display:inline-block;vertical-align:middle;width:38px;height:38px;object-fit:contain;">
+            </div>
+            <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#1a1a1a;margin:0 0 3px;line-height:1.3;">Order by Midnight</p>
+            <p style="font-family:Arial,sans-serif;font-size:11px;color:#999999;margin:0;line-height:1.3;">For next day delivery</p>
+          </td>
+          <td class="strip-cell strip-cell-2" width="150" valign="top" align="center" style="padding:18px 8px;border-right:1px solid #e8dfc8;border-bottom:1px solid #e8dfc8;">
+            <div style="width:52px;height:52px;border-radius:50%;background:#fef5ec;border:1.5px solid #e8dfc8;margin:0 auto 10px;overflow:hidden;line-height:52px;text-align:center;">
+              <img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/7_5098d834-8cae-4c57-b410-3d8a8a56cbc8.png?v=1772618190" width="38" height="38" alt="Packed Fresh" style="display:inline-block;vertical-align:middle;width:38px;height:38px;object-fit:contain;">
+            </div>
+            <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#1a1a1a;margin:0 0 3px;line-height:1.3;">Packed Fresh</p>
+            <p style="font-family:Arial,sans-serif;font-size:11px;color:#999999;margin:0;line-height:1.3;">Stays cold in transit</p>
+          </td>
+          <td class="strip-cell strip-cell-3" width="150" valign="top" align="center" style="padding:18px 8px;border-right:1px solid #e8dfc8;">
+            <div style="width:52px;height:52px;border-radius:50%;background:#fef5ec;border:1.5px solid #e8dfc8;margin:0 auto 10px;overflow:hidden;line-height:52px;text-align:center;">
+              <img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/8_f38068b7-fcd4-445a-93f1-43e30e60aea9.png?v=1772618190" width="38" height="38" alt="Hand Cut In-Store" style="display:inline-block;vertical-align:middle;width:38px;height:38px;object-fit:contain;">
+            </div>
+            <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#1a1a1a;margin:0 0 3px;line-height:1.3;">Hand Cut In-Store</p>
+            <p style="font-family:Arial,sans-serif;font-size:11px;color:#999999;margin:0;line-height:1.3;">Every order, every time</p>
+          </td>
+          <td class="strip-cell strip-cell-4" width="150" valign="top" align="center" style="padding:18px 8px;">
+            <div style="width:52px;height:52px;border-radius:50%;background:#fef5ec;border:1.5px solid #e8dfc8;margin:0 auto 10px;overflow:hidden;line-height:52px;text-align:center;">
+              <img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/9_0ea3f489-a50b-4067-9ade-d57f4adc3d24.png?v=1772618190" width="38" height="38" alt="Easy Subscription" style="display:inline-block;vertical-align:middle;width:38px;height:38px;object-fit:contain;">
+            </div>
+            <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#1a1a1a;margin:0 0 3px;line-height:1.3;">Easy Subscription</p>
+            <p style="font-family:Arial,sans-serif;font-size:11px;color:#999999;margin:0;line-height:1.3;">Pause or cancel anytime</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- DELIVERY DAYS -->
+  <tr>
+    <td style="padding:0;">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#fdf7e3;border-top:1px solid #e8dfc8;">
+        <tr>
+          <td align="center" style="padding:32px 32px 20px;">
+            <p style="font-family:Impact,Arial,sans-serif;font-size:26px;letter-spacing:0.04em;color:#1a1a1a;text-transform:uppercase;margin:0 0 6px;line-height:1;">WHEN TO EXPECT <span style="color:#af3630;">YOUR ORDER</span></p>
+            <p style="font-family:Arial,sans-serif;font-size:12px;color:#999999;margin:0;">Order by midnight the night before.</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 32px 36px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td class="delivery-col" width="48%" valign="top">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border:1px solid #e8dfc8;border-radius:12px;">
+                    <tr>
+                      <td align="center" style="padding:16px 16px 8px;">
+                        <div style="background:#fdf7e3;border-radius:10px;padding:10px;margin-bottom:12px;">
+                          <img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/ChatGPT_Image_Mar_5_2026_07_56_14_AM_copy.png?v=1772668916" width="110" alt="NSW Delivery" style="display:block;margin:0 auto;width:110px;height:76px;object-fit:contain;">
+                        </div>
+                        <p style="font-family:Impact,Arial,sans-serif;font-size:18px;letter-spacing:0.06em;color:#1a1a1a;margin:0 0 4px;text-transform:uppercase;">NSW</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#af3630;margin:0 0 4px;">Mon &middot; Wed &middot; Fri</p>
+                        <p style="font-family:Arial,sans-serif;font-size:11px;color:#bbbbbb;margin:0;">Order by midnight the night before</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="4%">&nbsp;</td>
+                <td class="delivery-col" width="48%" valign="top">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border:1px solid #e8dfc8;border-radius:12px;">
+                    <tr>
+                      <td align="center" style="padding:16px 16px 8px;">
+                        <div style="background:#fdf7e3;border-radius:10px;padding:10px;margin-bottom:12px;">
+                          <img src="https://cdn.shopify.com/s/files/1/0845/9839/1094/files/ChatGPT_Image_Mar_5_2026_07_56_14_AM.png?v=1772668916" width="110" alt="QLD Delivery" style="display:block;margin:0 auto;width:110px;height:76px;object-fit:contain;">
+                        </div>
+                        <p style="font-family:Impact,Arial,sans-serif;font-size:18px;letter-spacing:0.06em;color:#1a1a1a;margin:0 0 4px;text-transform:uppercase;">QLD</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#af3630;margin:0 0 4px;">Tue &middot; Thu</p>
+                        <p style="font-family:Arial,sans-serif;font-size:11px;color:#bbbbbb;margin:0;">Order by midnight the night before</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- VISIT US -->
+  <tr>
+    <td style="padding:0;">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#fdf7e3;border-top:1px solid #e8dfc8;">
+        <tr>
+          <td class="visit-left" width="220" valign="top" style="padding:28px 0 28px 24px;">
+            <img src="https://www.meatmerchantonline.com.au/cdn/shop/files/Inside_Space-Edit.jpg?v=1756457971&width=800" width="196" alt="Inside Meat Merchant Casuarina" style="display:block;width:196px;height:280px;object-fit:cover;border-radius:10px;border:1px solid #e8dfc8;">
+          </td>
+          <td class="visit-right" valign="top" style="padding:28px 24px;">
+            <p style="font-family:Impact,Arial,sans-serif;font-size:28px;letter-spacing:0.04em;color:#1a1a1a;line-height:0.95;margin:0 0 14px;text-transform:uppercase;">COME SEE US IN <span style="color:#af3630;">CASUARINA</span></p>
+            <p style="font-family:Arial,sans-serif;font-size:13px;color:#555555;line-height:1.6;margin:0 0 18px;">
+              <strong style="color:#1a1a1a;font-weight:700;display:block;margin-bottom:2px;">482 Casuarina Way, Casuarina NSW 2487</strong>
+              Next to Coles in the Casuarina Shopping Centre
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px;">
+              <tr>
+                <td style="padding:16px 20px;">
+                  <p style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#bbbbbb;margin:0 0 12px;">Opening Hours</p>
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td style="font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#1a1a1a;padding-bottom:7px;border-bottom:1px solid #f0ebe0;">Mon &ndash; Fri</td>
+                      <td align="right" style="font-family:Arial,sans-serif;font-size:13px;color:#888888;padding-bottom:7px;border-bottom:1px solid #f0ebe0;">6am &ndash; 6pm</td>
+                    </tr>
+                    <tr>
+                      <td style="font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#1a1a1a;padding:7px 0;border-bottom:1px solid #f0ebe0;">Saturday</td>
+                      <td align="right" style="font-family:Arial,sans-serif;font-size:13px;color:#888888;padding:7px 0;border-bottom:1px solid #f0ebe0;">6am &ndash; 5pm</td>
+                    </tr>
+                    <tr>
+                      <td style="font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#1a1a1a;padding-top:7px;">Sunday</td>
+                      <td align="right" style="font-family:Arial,sans-serif;font-size:13px;color:#888888;padding-top:7px;">6am &ndash; 4pm</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <a href="https://maps.google.com/?q=482+Casuarina+Way+Casuarina+NSW+2487" target="_blank" style="display:inline-block;background:#af3630;color:#ffffff;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;border-radius:5px;text-decoration:none;">&#x1F4CD; Get Directions</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- FOOTER -->
+  <tr>
+    <td class="footer-pad" bgcolor="#111111" style="background-color:#111111;padding:24px 32px;text-align:center;">
+      <img src="https://d3k81ch9hvuctc.cloudfront.net/company/Rtz3zv/images/c504ab4f-beb7-403a-8e5f-8d0544ced0db.png" alt="Meat Merchant" width="100" style="display:block;margin:0 auto 14px auto;">
+      <p style="margin:0 0 6px 0;font-size:12px;color:#555555;">482 Casuarina Way, Casuarina NSW 2487 &middot; Next to Coles</p>
+      <p style="margin:0;font-size:12px;color:#444444;">You&rsquo;re receiving this because you signed up for Meat Merchant updates.</p>
+    </td>
+  </tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
