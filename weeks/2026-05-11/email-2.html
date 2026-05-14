@@ -12,14 +12,18 @@
 
   @media only screen and (max-width: 599px) {
     .email-wrapper { width: 100% !important; }
-    .hero-img { width: 100% !important; height: auto !important; }
-    .main-headline { font-size: 48px !important; line-height: 52px !important; }
+    .hero-table { width: 100% !important; }
+    .hero-overlay { height: 320px !important; }
+    .main-headline { font-size: 38px !important; line-height: 42px !important; }
     .sub-headline { font-size: 20px !important; }
-    .body-copy { font-size: 16px !important; line-height: 26px !important; }
-    .cta-btn { font-size: 18px !important; padding: 18px 32px !important; }
+    .body-copy { font-size: 15px !important; line-height: 26px !important; }
     .price-block { font-size: 52px !important; }
-    .price-label { font-size: 14px !important; }
-    .footer-copy { font-size: 12px !important; }
+    .price-top-pad { padding-top: 24px !important; }
+    .side-img-td { display: block !important; width: 100% !important; padding-right: 0 !important; padding-bottom: 20px !important; }
+    .side-img-td img { width: 100% !important; }
+    .side-copy-td { display: block !important; width: 100% !important; }
+    .pairings-img { width: 100% !important; }
+    .pad-mobile { padding-left: 22px !important; padding-right: 22px !important; }
   }
 </style>
 </head>
@@ -59,10 +63,10 @@
         <v:textbox inset="0,0,0,0">
       <![endif]-->
       <div>
-      <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="width:600px;max-width:600px;background-image:url('https://d3k81ch9hvuctc.cloudfront.net/company/Rtz3zv/images/ce627621-7952-44f0-bae7-531afea54ee1.png');background-color:#000000;background-position:center center;background-repeat:no-repeat;background-size:cover;">
+      <table class="hero-table" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="width:600px;max-width:600px;background-image:url('https://d3k81ch9hvuctc.cloudfront.net/company/Rtz3zv/images/ce627621-7952-44f0-bae7-531afea54ee1.png');background-color:#000000;background-position:center center;background-repeat:no-repeat;background-size:cover;">
         <tr>
-          <td align="center" valign="middle" height="440" style="height:440px;padding:0;text-align:center;">
-            <h1 class="main-headline" style="font-family:Impact,Arial Black,sans-serif;font-weight:900;font-size:56px;color:#ffffff;margin:0 0 24px 0;padding:0;line-height:0.95;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.5);">Final Rib Fillets.</h1>
+          <td class="hero-overlay" align="center" valign="middle" height="440" style="height:440px;padding:0;text-align:center;">
+            <h1 class="main-headline" style="font-family:Impact,Arial Black,sans-serif;font-weight:900;font-size:56px;color:#ffffff;margin:0 auto 24px auto;padding:0;line-height:0.95;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.5);text-align:center;width:100%;">Final Rib Fillets.</h1>
             <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" target="_blank"
                style="display:inline-block; background-color:#af3630; color:#ffffff; font-family:Impact, Arial, sans-serif; font-size:20px; letter-spacing:3px; text-transform:uppercase; padding:18px 52px; text-decoration:none;">
               Add to Your Box
@@ -80,7 +84,7 @@
 
   <!-- PRICE BLOCK -->
   <tr>
-    <td bgcolor="#1a1a1a" align="center" style="padding: 0 40px 40px;">
+    <td bgcolor="#1a1a1a" align="center" class="price-top-pad pad-mobile" style="padding: 0 40px 40px;">
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td align="center" bgcolor="#222222" style="padding: 32px 24px; border-left: 4px solid #af3630;">
@@ -97,7 +101,7 @@
     <td bgcolor="#1a1a1a" style="padding: 0 40px 36px;">
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
-          <td valign="top" width="200" style="width:200px; padding-right:20px; font-size:0; line-height:0;">
+          <td class="side-img-td" valign="top" width="200" style="width:200px; padding-right:20px; font-size:0; line-height:0;">
             <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" target="_blank" style="display:block; border:0; font-size:0; line-height:0;">
               <img src="https://d3k81ch9hvuctc.cloudfront.net/company/Rtz3zv/images/8233f7e2-4947-42dd-9840-48ec3b778faf.jpeg"
                    alt="Rib Fillet"
@@ -105,7 +109,7 @@
                    style="display:block; width:200px; height:auto;">
             </a>
           </td>
-          <td valign="top" style="padding:0;">
+          <td class="side-copy-td" valign="top" style="padding:0;">
             <p class="body-copy" style="margin:0 0 16px; font-family:Arial, sans-serif; font-size:15px; line-height:26px; color:#cccccc;">
               Beautiful marbling. Grass-fed. Hand-cut.
             </p>
@@ -144,7 +148,7 @@
   <tr>
     <td bgcolor="#1a1a1a" align="center" style="padding: 0 40px 24px;">
       <a href="https://www.meatmerchantonline.com.au/pages/build-your-box" target="_blank" style="display:block; border:0; font-size:0; line-height:0;">
-        <img src="https://d3k81ch9hvuctc.cloudfront.net/company/Rtz3zv/images/35b63d61-d68e-4e8a-8e8f-c276ea9e2df6.png"
+        <img class="pairings-img" src="https://d3k81ch9hvuctc.cloudfront.net/company/Rtz3zv/images/56b6becc-10e2-4583-8299-a8009383dbc6.png"
              alt="Rib Fillet Pairings"
              width="520"
              style="display:block; width:520px; height:auto;">
